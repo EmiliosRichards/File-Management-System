@@ -100,11 +100,10 @@ A custom built FMS provides the following opportunities:
 
 The File Management System must be able to:
 
-- Create new documents
-- Open and read documents
-- Edit documents
-- Delete documents 
-- Search for documents
+- Creating, reading, updating, and deleting files (CRUD operations).
+- Organizing files into directories based on categories or tags.
+- Searching for files based on name, content, or metadata.
+
 
 ### Non-Functional Requirements
 
