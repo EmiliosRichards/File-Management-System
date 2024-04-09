@@ -114,11 +114,11 @@ Please adhere to the following steps for your contributions to be considered:
 - Ensure your commit messages clearly describe the changes.
 - Open a pull request with a clear title and description.
 
-For more information on how to contribute, please read the [CONTRIBUTING.md](https://github.com/EmiliosRichards/Beginner-Project-Python-Calculator/blob/main/CONTRIBUTING.md) guide in our repository.
+For more information on how to contribute, please read the [CONTRIBUTING.md](cont url here) guide in our repository.
 
 ### Licence
 
-This project is licensed under the MIT License - see the [LICENSE]([LICENSE_FILE_LINK](https://github.com/EmiliosRichards/Beginner-Project-Python-Calculator/blob/main/LICENSE)) file for details.
+This project is licensed under the MIT License - see the [LICENSE]([https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
 
 ### Contact Information
 
