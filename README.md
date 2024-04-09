@@ -2,53 +2,21 @@
 
 Hello and welcome! This document contains insight into my process of designing and building a simple File Manager! 
 
-## What is a File Management System?
-
-A file management system is a system or program that allows a user to manipulate files. Some very common examples include File Explorer on Windows, and Finder on macOS. These applications empower the user with a plethora of options to manage and organise files, both of which utilise a clean and intuitive user interface which facilitates ease of use and functionality. 
-
-To list some functions included in a File Management System
-
-- **Creating**: Create new folders/ files.
-- **Moving**: Change the location of existing folders/ files.
-- **Renaming**: Change the name of folders/ files.
-- **Deleting**: Deleting folders/ files.
-
-These are perhaps the most common and useful actions a FMS can perform.
-
-
-## The Why?
-
-You are very likely wondering, "with the options of File Explorer and Finder, why would anyone ever want to create their own FMS?", well, there are some valuable lessons one can learn from building their own system and even some aspects that superesede traditional systems. With the ability to impliment any desired functionality, a custom built FMS allows tailor made functions that File Explorer/ Finder cannot perform, with the extent of customisation left in the hands of the person creating the system, and their specific needs. 
-
-A custom built FMS provides the following opportunities:
-
-- **Edicational Tool**: A lesson in object oriented programming, file IO, and exception handling.
-- **Customized Workflow**: Create tailor made functionalities for specific needs.
-- **Cross Platform Compatibility**: Can be designed to work across different operating systems.
-- **Automation**: Automate routine tasks.
-- **Learning and Experimentation**: The development of such a system can serve as a sandbox for experimenting with python libraries, exploring data structures, and building user interfaces.
-
-
-
-
-
-
-
 
 ## Document Contents
 
 
-### Project Significance
-- **What is a File Management System?**: Covers 'What is a File Management System'.
-- **The Why?**: Learn the reasons why you should build a File Management System.
 
-### Design Phase
-
-- **How to Use Python Calculator**: This will contain everything you need to know if you want to run Python Calculator on your own computer!
-- **Challenges**: This section will discuss some challenges I faced, what I did to overcome them.
+- **Project Significance**: What is a File Management System and why build your own custom File Management System
+- **Project Overview**: This section will discuss some challenges I faced, what I did to overcome them.
+- **Design Phase**: This section will discuss some challenges I faced, what I did to overcome them.
 - **Technical Insights**: For all you nerds out there! This section will talk about technical considerations.
 - **The Final Version**: During this section, we will discuss the end product, some expectations that did not turn out as planned, and all the lessons I learned on the way.
 - **Conclusion**: Here you will find a summary of the project, how you can contribute, as well as new things I will work on in the future.
+
+
+### Design Phase
+
 
 ### Building Process
 
@@ -63,21 +31,25 @@ A custom built FMS provides the following opportunities:
 
 
 
+## Project Significance
+
+## What is a File Management System?
+
+A File Management System (FMS) enables users to manage and organise digital files efficiently. Popular examples include Windows' File Explorer and macOS's Finder. These applications offer users a wide range of management tools through a clean and intuitive interface, enhancing usability and functionality. Core FMS functions include creating, moving, renaming, deleting files and folders.
 
 
+# The Why?
 
+You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?' The answer lies in the unique learning opportunities and the abiblity to surpass the limitations of traditional systems.
+With the ability to impliment any desired functionality, a custom built FMS allows tailor made functions that File Explorer/ Finder cannot perform, with the extent of customisation left in the hands of the person creating the system, and their specific needs. 
 
+A custom built FMS provides the following opportunities:
 
-
-
-
-
-
-
-
-
-
-
+- **Edicational Tool**: A lesson in object oriented programming, file IO, and exception handling.
+- **Customized Workflow**: Create tailor made functionalities for specific needs.
+- **Cross Platform Compatibility**: Can be designed to work across different operating systems.
+- **Automation**: Automate routine tasks.
+- **Learning and Experimentation**: The development of such a system can serve as a sandbox for experimenting with python libraries, exploring data structures, and building user interfaces.
 
 
 
