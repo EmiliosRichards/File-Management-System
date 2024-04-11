@@ -27,8 +27,7 @@ A File Management System (FMS) enables users to manage and organise digital file
 
 ## The Why?
 
-You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?' The answer lies in the unique learning opportunities and the abiblity to surpass the limitations of traditional systems.
-With the ability to impliment any desired functionality, a custom built FMS allows tailor made functions that File Explorer/ Finder cannot perform, with the extent of customisation left in the hands of the person creating the system, and their specific needs. 
+You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?' The answer lies in the unique learning opportunities and the abiblity to surpass the limitations of traditional systems. 
 
 A custom built FMS provides the following opportunities:
 
@@ -37,10 +36,6 @@ A custom built FMS provides the following opportunities:
 - **Cross Platform Compatibility**: Can be designed to work across different operating systems.
 - **Automation**: Automate routine tasks.
 - **Learning and Experimentation**: The development of such a system can serve as a sandbox for experimenting with python libraries, exploring data structures, and building user interfaces.
-
-
-
-
 
 
 # Design Phase
@@ -53,17 +48,25 @@ A custom built FMS provides the following opportunities:
 
 **Philosophy of project**: Start Small: Begin with core functionalities that are common to all operating systems, and gradually expand features and capabilities.
 
-## Tools
+## Tools and Libraries
 
-(Python, Github, Coding IDE) Built-in Libraries (os, shutil, pathlib)
+### Development Environment
+- **Python**: This projects primary programming language, known for its readability and broad support for tasks ranging from web development to automation.
+- **GitHub**: Used for version control, tracking changes, and managing project iterations.
+- **Coding IDE**: Essential for writing, testing, and debugging code. Use of an IDE that supports Python and integrates well with GitHub allows for seamless development.
+
+### Key Libraries
+- **os**: Utilized for handling basic operating system functionalities like reading and writing files, and directory manipulation.
+- **shutil**: Helps in performing high-level file operations such as copying and moving files.
+- **pathlib**: Offers an object-oriented approach to filesystem paths, making it easier to work with file paths across different operating systems.
 
 ## Functional Requirements
 
 The File Management System must be able to:
 
-- Creating, reading, updating, and deleting files (CRUD operations).
-- Organizing files into directories based on categories or tags.
-- Searching for files based on name, content, or metadata.
+- Create, read, update, and delete files (CRUD operations).
+- Organizing files into directories based on categories or tags. Initially, the system will organize files into predefined categories such as 'Documents', 'Images', etc. Future updates will introduce the ability to create custom tags, enhancing personalization and search functionality.
+- Searching for files based on name, content, categorie, tag, or metadata. Perfrom a non case-senstitive search in real-time.
 
 
 ## Non-Functional Requirements
@@ -71,15 +74,25 @@ The File Management System must be able to:
 The File Management System should:
 
 - Work through the Command Line.
-- Have a clean aesthetic with clear prompts and feedback messages.
+- Have a clean aesthetic with clear prompts and feedback messages. To acheive a 'clean aesthetic' it must be unclutted with a consistant format.
 - Cross platform compatibility.
-- Have intuitive commands and seemless execption handling.
+- Have intuitive commands and seamless exception handling. Commands must be labeled and located in a natural way keeping usage straightforward. 
 - Uncluttered code built with the potential of expansion and modification in mind.
 
 
 ## Design and Architecture
 
-**Basic Flow**: Welcome message, display available actions and corresponding number, accept a number as input, prompt for any relevent additinal input, perform action. Cancel/ back + exit appliction functionality.
+**Basic Flow**: 
+
+1. Welcome message
+2. Display available actions and corresponding number. 
+3. Accept a number as input.
+4. Prompt for any relevent additinal input.
+5. Perform action. 
+
+Constant: Cancel/ back + exit appliction functionality.
+
+![Design Flowchart](Fill In URL)
 
 **Code**: Import required libraries, define classes, implement file operations, account for exeption handling.
 
