@@ -114,7 +114,7 @@ Please adhere to the following steps for your contributions to be considered:
 - Ensure your commit messages clearly describe the changes.
 - Open a pull request with a clear title and description.
 
-For more information on how to contribute, please read the [CONTRIBUTING.md](cont url here) guide in our repository.
+For more information on how to contribute, please read the [Contributions.md](https://github.com/EmiliosRichards/File-Management-System/blob/main/Contributions.md) guide in our repository.
 
 ### Licence
 
