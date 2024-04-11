@@ -84,6 +84,8 @@ The File Management System should:
 
 ### Basic Flow 
 
+A simplified representation of how the File Manager will work:
+
 1. Welcome message
 2. Display available actions and corresponding number. 
 3. Accept a number as input.
