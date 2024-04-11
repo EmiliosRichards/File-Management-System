@@ -82,7 +82,7 @@ The File Management System should:
 
 ## Design and Architecture
 
-**Basic Flow**: 
+### Basic Flow 
 
 1. Welcome message
 2. Display available actions and corresponding number. 
@@ -94,10 +94,15 @@ Constant: Cancel/ back + exit appliction functionality.
 
 ![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Flowchart.png)
 
-**Code**: Import required libraries, define classes, implement file operations, account for exeption handling.
+### Code Layout
+
+1. Import required libraries. 
+2. Define classes.
+3. Implement file operations. 
+4. Account for exeption handling.
 
 
-This covers the design phase of the project. Next, we will cover how to use the finished product, how I arrived at the completion of said product, and what I learned during the process of creating it.
+**This covers the design phase of the project. Next, we will cover how to use the finished product, how I arrived at the completion of said product, and what I learned during the process of creating it.**
 
 
 
