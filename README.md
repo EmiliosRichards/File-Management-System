@@ -94,7 +94,7 @@ A simplified representation of how the File Manager will work:
 
 Constant: Cancel/ back + exit appliction functionality.
 
-![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Flowchart.png)
+![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Flowchart.png)
 
 ### Code Layout
 
