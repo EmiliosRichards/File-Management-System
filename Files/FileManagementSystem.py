@@ -9,17 +9,38 @@ class Document:
         self.file_name = file_name
     
     def get_file_content(self):
-        with open(self.file_name, 'r') as file:
-            return file.read()
+        try:
+            with open(self.file_name, 'r') as file:
+                return file.read()
+        except FileNotFoundError:
+            return f'Error: File {self.file_name} does not exist.'
+        except PermissionError:
+            return f'Error: You do not have permission to read {self.file_name}.'
+        except Exception as e:
+            return f'An unexpected error occurred: {e}'
 
     def write_to_file(self, content):
-        with open(self.file_name, 'w') as file:
-            file.write(content)
-
+        try:
+            with open(self.file_name, 'w') as file:
+                file.write(content)
+            return f'Content written to {self.file_name} successfully.'
+        except FileNotFoundError:
+            return f'Error: File {self.file_name} does not exist.'
+        except PermissionError:
+            return f'Error: You do not have permission to write to {self.file_name}.'
+        except Exception as e:
+            return f'An unexpected error occurred: {e}'
+        
     def get_file_size(self):
-        return os.path.getsize(self.file_name)
-    
-
+        try:    
+            return os.path.getsize(self.file_name)
+        except FileNotFoundError:
+            return f'Error: File {self.file_name} does not exist.'
+        except PermissionError:
+            return f'Error: You do not have permission to access {self.file_name}.'
+        except Exception as e:
+            return f'An unexpected error occurred: {e}'
+        
 
 class FileManager:
     def __init__(self):
@@ -28,74 +49,192 @@ class FileManager:
         self.needs_refresh = False    # This is a flag to check if the files list needs to be refreshed.
 
     def list_files(self):
-        return self.files
+        try:    
+            return self.files
+        except FileNotFoundError:
+            return f'Error: Directory {self.path} does not exist.'
+        except PermissionError:
+            return f'Error: You do not have permission to access {self.path}.'
+        except Exception as e:
+            return f'An unexpected error occurred: {e}'
+
 
     def create_file(self, file_name):
-        with open(file_name, 'w') as file:
-            file.write('')
-        self.files.append(file_name)
-        self.needs_refresh = True
+        try:
+            with open(file_name, 'w') as file:
+                file.write('')
+            self.files.append(file_name)
+            self.needs_refresh = True
+            print(f'File {file_name} created successfully.')
+        except PermissionError:
+            print(f'Error: You do not have permission to create {file_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+        except FileExistsError:
+            print(f'Error: File {file_name} already exists.')
+
+            
 
     def delete_file(self, file_name):
-        os.remove(file_name)
-        self.files.remove(file_name)
-        self.needs_refresh = True
+        try:
+            os.remove(file_name)
+            self.files.remove(file_name)
+            self.needs_refresh = True
+            print(f'File {file_name} deleted successfully.')
+        except FileNotFoundError:
+            print(f'Error: File {file_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to delete {file_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
 
     def rename_file(self, old_name, new_name):
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
-        self.files.append(new_name)
-        self.needs_refresh = True
+        try:
+            os.rename(old_name, new_name)
+            self.files.remove(old_name)
+            self.files.append(new_name)
+            self.needs_refresh = True
+            print(f'File {old_name} renamed to {new_name} successfully.')
+        except FileNotFoundError:
+            print(f'Error: File {old_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to rename {old_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
 
     def move_file(self, file_name, new_path):
-        shutil.move(file_name, new_path)
-        self.files.remove(file_name)
-        self.needs_refresh = True
+        try:
+            shutil.move(file_name, new_path)
+            self.files.remove(file_name)
+            self.needs_refresh = True
+            print(f'File {file_name} moved to {new_path} successfully.')
+        except FileNotFoundError:
+            print(f'Error: File {file_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to move {file_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
 
     def copy_file(self, file_name, new_path):
-        shutil.copy(file_name, new_path)
-        self.needs_refresh = True
+        try:
+            shutil.copy(file_name, new_path)
+            self.needs_refresh = True
+            print(f'File {file_name} copied to {new_path} successfully.')
+        except FileNotFoundError:
+            print(f'Error: File {file_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to copy {file_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
+            
     def create_directory(self, directory_name):
-        os.mkdir(directory_name)
-        self.files.append(directory_name)
+        try:
+            os.mkdir(directory_name)
+            self.files.append(directory_name)
+            self.needs_refresh = True
+            print(f'Directory {directory_name} created successfully.')
+        except PermissionError:
+            print(f'Error: You do not have permission to create {directory_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+        except FileExistsError:
+            print(f'Error: Directory {directory_name} already exists.')
 
     def delete_directory(self, directory_name):
-        shutil.rmtree(directory_name)
-        self.files.remove(directory_name)
+        try:
+            shutil.rmtree(directory_name)
+            self.files.remove(directory_name)
+            self.needs_refresh = True
+            print(f'Directory {directory_name} deleted successfully.')
+        except FileNotFoundError:
+            print(f'Error: Directory {directory_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to delete {directory_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
 
     def rename_directory(self, old_name, new_name):
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
-        self.files.append(new_name)
-        self.needs_refresh = True  
+        try:
+            os.rename(old_name, new_name)
+            self.files.remove(old_name)
+            self.files.append(new_name)
+            self.needs_refresh = True  
+            print(f'Directory {old_name} renamed to {new_name} successfully.')
+        except FileNotFoundError:
+            print(f'Error: Directory {old_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to rename {old_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
 
     def move_directory(self, directory_name, new_path):
-        shutil.move(directory_name, new_path)
-        self.needs_refresh = True
+        try:
+            shutil.move(directory_name, new_path)
+            self.needs_refresh = True
+            print(f'Directory {directory_name} moved to {new_path} successfully.')
+        except FileNotFoundError:
+            print(f'Error: Directory {directory_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to move {directory_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
 
     def copy_directory(self, directory_name, new_path):
-        shutil.copytree(directory_name, new_path)
-        self.needs_refresh = True
+        try:
+            shutil.copytree(directory_name, new_path)
+            self.needs_refresh = True
+            print(f'Directory {directory_name} copied to {new_path} successfully.')
+        except FileNotFoundError:
+            print(f'Error: Directory {directory_name} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to copy {directory_name}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
+
 
     def list_directories(self):
-        directories = []
-        for file in self.files:
-            if os.path.isdir(file):
-                directories.append(file)
-        return directories
-    
+        try:
+            directories = []
+            for file in self.files:
+                if os.path.isdir(file):
+                    directories.append(file)
+            return directories
+        except FileNotFoundError:
+            return f'Error: Directory {self.path} does not exist.'
+        except PermissionError:
+            return f'Error: You do not have permission to access {self.path}.'
+        except Exception as e:
+            return f'An unexpected error occurred: {e}'
+        
     def refresh_files(self):
-        if self.needs_refresh:
-            self.files = os.listdir(self.path)
-            self.needs_refresh = False
+        try:
+            if self.needs_refresh:
+                self.files = os.listdir(self.path)
+                self.needs_refresh = False
+        except FileNotFoundError:   
+            print(f'Error: Directory {self.path} does not exist.')
+        except PermissionError:
+            print(f'Error: You do not have permission to access {self.path}.')
+        except Exception as e:
+            print(f'An unexpected error occurred: {e}')
 
 
 
 class CLI:
     def __init__(self):
         self.file_manager = FileManager()
-        
+
+    def welcome_message(self):
+        print('Welcome to the File Management System!')
+        self.display_menu()
+
     def display_menu(self):
+        print('Please choose an option:')
         print('1. List files')
         print('2. Create file')
         print('3. Delete file')
@@ -230,4 +369,4 @@ class CLI:
 if __name__ == '__main__':
     file_manager = FileManager()
     cli = CLI(file_manager)
-    cli.display_menu()
+    cli.welcome_message()
