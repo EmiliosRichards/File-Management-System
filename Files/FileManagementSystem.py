@@ -88,3 +88,146 @@ class FileManager:
         if self.needs_refresh:
             self.files = os.listdir(self.path)
             self.needs_refresh = False
+
+
+
+class CLI:
+    def __init__(self):
+        self.file_manager = FileManager()
+        
+    def display_menu(self):
+        print('1. List files')
+        print('2. Create file')
+        print('3. Delete file')
+        print('4. Rename file')
+        print('5. Move file')
+        print('6. Copy file')
+        print('7. Create directory')
+        print('8. Delete directory')
+        print('9. Rename directory')
+        print('10. Move directory')
+        print('11. Copy directory')
+        print('12. List directories')
+        print('13. Exit')
+        self.handle_input()
+
+    def handle_input(self):
+        choice = input('Enter your choice: ')
+        if choice == '1':
+            self.list_files()
+        elif choice == '2':
+            self.create_file()
+        elif choice == '3':
+            self.delete_file()
+        elif choice == '4':
+            self.rename_file()
+        elif choice == '5':
+            self.move_file()
+        elif choice == '6':
+            self.copy_file()
+        elif choice == '7':
+            self.create_directory()
+        elif choice == '8':
+            self.delete_directory()
+        elif choice == '9':
+            self.rename_directory()
+        elif choice == '10':
+            self.move_directory()
+        elif choice == '11':
+            self.copy_directory()
+        elif choice == '12':
+            self.list_directories()
+        elif choice == '13':
+            exit()
+        else:
+            print('Invalid choice. Please try again.')
+        self.display_menu()
+
+    def list_files(self):
+        self.file_manager.refresh_files()
+        files = self.file_manager.list_files()
+        print('Files in the current directory:')
+        for file in files:
+            print(file)
+    
+    def create_file(self):
+        file_name = input('Enter the name of the file you would like to create: ')
+        self.file_manager.create_file(file_name)
+        print(f'File {file_name} created successfully.')
+        self.display_menu()
+    
+    def delete_file(self):
+        file_name = input('Enter the name of the file you would like to delete: ')
+        self.file_manager.delete_file(file_name)
+        print(f'File {file_name} deleted successfully.')
+        self.display_menu()
+    
+    def rename_file(self):
+        old_name = input('Enter the name of the file you would like to rename: ')
+        new_name = input('Enter the new name for the file: ')
+        self.file_manager.rename_file(old_name, new_name)
+        print(f'File {old_name} renamed to {new_name} successfully.')
+        self.display_menu()
+
+    def move_file(self):
+        file_name = input('Enter the name of the file you would like to move: ')
+        new_path = input('Enter the new path for the file: ')
+        self.file_manager.move_file(file_name, new_path)
+        print(f'File {file_name} moved to {new_path} successfully.')
+        self.display_menu()
+
+    def copy_file(self):
+        file_name = input('Enter the name of the file you would like to copy: ')
+        new_path = input('Enter the new path for the file: ')
+        self.file_manager.copy_file(file_name, new_path)
+        print(f'File {file_name} copied to {new_path} successfully.')
+        self.display_menu()
+    
+    def create_directory(self):
+        directory_name = input('Enter the name of the directory you would like to create: ')
+        self.file_manager.create_directory(directory_name)
+        print(f'Directory {directory_name} created successfully.')
+        self.display_menu()
+    
+    def delete_directory(self):
+        directory_name = input('Enter the name of the directory you would like to delete: ')
+        self.file_manager.delete_directory(directory_name)
+        print(f'Directory {directory_name} deleted successfully.')
+        self.display_menu()
+
+    def rename_directory(self):
+        old_name = input('Enter the name of the directory you would like to rename: ')
+        new_name = input('Enter the new name for the directory: ')
+        self.file_manager.rename_directory(old_name, new_name)
+        print(f'Directory {old_name} renamed to {new_name} successfully.')
+        self.display_menu()
+    
+    def move_directory(self):
+        directory_name = input('Enter the name of the directory you would like to move: ')
+        new_path = input('Enter the new path for the directory: ')
+        self.file_manager.move_directory(directory_name, new_path)
+        print(f'Directory {directory_name} moved to {new_path} successfully.')
+        self.display_menu()
+    
+    def copy_directory(self):
+        directory_name = input('Enter the name of the directory you would like to copy: ')
+        new_path = input('Enter the new path for the directory: ')
+        self.file_manager.copy_directory(directory_name, new_path)
+        print(f'Directory {directory_name} copied to {new_path} successfully.')
+        self.display_menu()
+    
+    def list_directories(self):
+        directories = self.file_manager.list_directories()
+        print('Directories in the current directory:')
+        for directory in directories:
+            print(directory)
+        self.display_menu()
+
+    def exit(self):
+        exit()
+
+
+if __name__ == '__main__':
+    file_manager = FileManager()
+    cli = CLI(file_manager)
+    cli.display_menu()
