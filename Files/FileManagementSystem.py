@@ -60,18 +60,20 @@ class FileManager:
 
 
     def create_file(self, file_name):
-        try:
-            with open(file_name, 'w') as file:
-                file.write('')
-            self.files.append(file_name)
-            self.needs_refresh = True
-            print(f'File {file_name} created successfully.')
-        except PermissionError:
-            print(f'Error: You do not have permission to create {file_name}.')
-        except Exception as e:
-            print(f'An unexpected error occurred: {e}')
-        except FileExistsError:
+        if file_name in self.files:
             print(f'Error: File {file_name} already exists.')
+        else:
+            try:
+                with open(file_name, 'w') as file:
+                    file.write('')
+                self.files.append(file_name)
+                self.needs_refresh = True
+                print(f'File {file_name} created successfully.')
+            except PermissionError:
+                print(f'Error: You do not have permission to create {file_name}.')
+            except Exception as e:
+                print(f'An unexpected error occurred: {e}')
+            
 
             
 
@@ -131,18 +133,19 @@ class FileManager:
 
             
     def create_directory(self, directory_name):
-        try:
-            os.mkdir(directory_name)
-            self.files.append(directory_name)
-            self.needs_refresh = True
-            print(f'Directory {directory_name} created successfully.')
-        except PermissionError:
-            print(f'Error: You do not have permission to create {directory_name}.')
-        except Exception as e:
-            print(f'An unexpected error occurred: {e}')
-        except FileExistsError:
+        if directory_name in self.files:
             print(f'Error: Directory {directory_name} already exists.')
-
+        else:
+            try:
+                os.mkdir(directory_name)
+                self.files.append(directory_name)
+                self.needs_refresh = True
+                print(f'Directory {directory_name} created successfully.')
+            except PermissionError:
+                print(f'Error: You do not have permission to create {directory_name}.')
+            except Exception as e:
+                print(f'An unexpected error occurred: {e}')
+           
     def delete_directory(self, directory_name):
         try:
             shutil.rmtree(directory_name)
