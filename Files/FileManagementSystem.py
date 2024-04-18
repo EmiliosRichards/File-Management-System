@@ -88,13 +88,13 @@ class FileManager:
         return f'File {file_name} deleted successfully.'
         
     @exception_handler
-    def rename_file(self, old_name, new_name):
+    def rename_file(self, current_filename, new_name):
         """Rename a file."""
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
+        os.rename(current_filename, new_name)
+        self.files.remove(current_filename)
         self.files.append(new_name)
         self.refresh_files()
-        return f'File {old_name} renamed to {new_name} successfully.'
+        return f'File {current_filename} renamed to {new_name} successfully.'
         
     @exception_handler
     def move_file(self, file_name, new_path):
@@ -145,13 +145,13 @@ class FileManager:
         return f'Directory {directory_name} deleted successfully.'
         
     @exception_handler
-    def rename_directory(self, old_name, new_name):
+    def rename_directory(self, current_filename, new_name):
         '''Rename a directory.'''	
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
+        os.rename(current_filename, new_name)
+        self.files.remove(current_filename)
         self.files.append(new_name)
         self.refresh_files() 
-        return f'Directory {old_name} renamed to {new_name} successfully.'
+        return f'Directory {current_filename} renamed to {new_name} successfully.'
         
     @exception_handler
     def move_directory(self, directory_name, new_path):
@@ -200,60 +200,34 @@ class CLI:
         self.display_menu()
 
     def display_menu(self):
-        print('Please choose an option:')
-        print('1. List files')
-        print('2. Create file')
-        print('3. Delete file')
-        print('4. Rename file')
-        print('5. Move file')
-        print('6. Copy file')
-        print('7. Create directory')
-        print('8. Delete directory')
-        print('9. Rename directory')
-        print('10. Move directory')
-        print('11. Copy directory')
-        print('12. List directories')
-        print('13. Exit')
+        """Display the command menu to the user."""
+        options = [
+            "1. List files", "2. Create file", "3. Delete file", "4. Rename file",
+            "5. Move file", "6. Copy file", "7. Create directory", "8. Delete directory",
+            "9. Rename directory", "10. Move directory", "11. Copy directory", "12. List directories", "13. Exit"
+        ]
+        for option in options:
+            print(option)
         self.handle_input()
 
     def handle_input(self):
+        """Handle user input from the command menu."""
         choice = input('Enter your choice: ')
-        if choice == '1':
-            self.list_files()
-        elif choice == '2':
-            self.create_file()
-        elif choice == '3':
-            self.delete_file()
-        elif choice == '4':
-            self.rename_file()
-        elif choice == '5':
-            self.move_file()
-        elif choice == '6':
-            self.copy_file()
-        elif choice == '7':
-            self.create_directory()
-        elif choice == '8':
-            self.delete_directory()
-        elif choice == '9':
-            self.rename_directory()
-        elif choice == '10':
-            self.move_directory()
-        elif choice == '11':
-            self.copy_directory()
-        elif choice == '12':
-            self.list_directories()
-        elif choice == '13':
-            exit()
-        else:
-            print('Invalid choice. Please try again.')
+        action = {
+            '1': self.list_files, '2': self.create_file, '3': self.delete_file,
+            '4': self.rename_file, '5': self.move_file, '6': self.copy_file,
+            '7': self.create_directory, '8': self.delete_directory, '9': self.rename_directory,
+            '10': self.move_directory, '11': self.copy_directory, '12': self.list_directories,
+            '13': self.exit
+        }
+        result = action.get(choice, lambda: 'Invalid choice. Please try again.')()
+        if result:
+            print(result)
         self.display_menu()
 
     def list_files(self):
-        self.file_manager.refresh_files()
-        files = self.file_manager.list_files()
-        print('Files in the current directory:')
-        for file in files:
-            print(file)
+        """List all files in the current directory."""
+        return self.file_manager.list_files()
     
     def create_file(self):
         file_name = input('Enter the name of the file you would like to create: ')
@@ -268,10 +242,10 @@ class CLI:
         self.display_menu()
     
     def rename_file(self):
-        old_name = input('Enter the name of the file you would like to rename: ')
+        current_filename = input('Enter the name of the file you would like to rename: ')
         new_name = input('Enter the new name for the file: ')
-        self.file_manager.rename_file(old_name, new_name)
-        print(f'File {old_name} renamed to {new_name} successfully.')
+        self.file_manager.rename_file(current_filename, new_name)
+        print(f'File {current_filename} renamed to {new_name} successfully.')
         self.display_menu()
 
     def move_file(self):
@@ -301,10 +275,10 @@ class CLI:
         self.display_menu()
 
     def rename_directory(self):
-        old_name = input('Enter the name of the directory you would like to rename: ')
+        current_filename = input('Enter the name of the directory you would like to rename: ')
         new_name = input('Enter the new name for the directory: ')
-        self.file_manager.rename_directory(old_name, new_name)
-        print(f'Directory {old_name} renamed to {new_name} successfully.')
+        self.file_manager.rename_directory(current_filename, new_name)
+        print(f'Directory {current_filename} renamed to {new_name} successfully.')
         self.display_menu()
     
     def move_directory(self):
