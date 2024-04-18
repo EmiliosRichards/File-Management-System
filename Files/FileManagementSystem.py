@@ -57,50 +57,56 @@ class FileManager:
     def __init__(self):
         self.path = os.getcwd()
         self.files = os.listdir(self.path)
-        self.refresh_files()
-
+        
     def refresh_files(self):
-            self.files = os.listdir(self.path)
+        """Refresh the list of files in the current directory."""
+        self.files = os.listdir(self.path)
 
     @exception_handler
     def list_files(self):  
-            return self.files
+        """List all files in the current directory."""
+        return self.files
 
     @exception_handler
     def create_file(self, file_name):
+        """Create a file if it does not exist."""
         if file_name in self.files:
-            print(f'Error: File {file_name} already exists.')
+            return f'Error: File {file_name} already exists.'
         else:
             with open(file_name, 'w') as file:
                 file.write('')
             self.files.append(file_name)
             self.refresh_files()
-            print(f'File {file_name} created successfully.')
+            return f'File {file_name} created successfully.'
             
     @exception_handler
     def delete_file(self, file_name):
+        """Delete a file."""
         os.remove(file_name)
         self.files.remove(file_name)
         self.refresh_files()
-        print(f'File {file_name} deleted successfully.')
+        return f'File {file_name} deleted successfully.'
         
     @exception_handler
     def rename_file(self, old_name, new_name):
+        """Rename a file."""
         os.rename(old_name, new_name)
         self.files.remove(old_name)
         self.files.append(new_name)
         self.refresh_files()
-        print(f'File {old_name} renamed to {new_name} successfully.')
+        return f'File {old_name} renamed to {new_name} successfully.'
         
     @exception_handler
     def move_file(self, file_name, new_path):
+        """Move a file to a new path."""
         shutil.move(file_name, new_path)
         self.files.remove(file_name)
         self.refresh_files()
-        print(f'File {file_name} moved to {new_path} successfully.')
+        return f'File {file_name} moved to {new_path} successfully.'
 
     @exception_handler
     def copy_file(self, file_name, new_path, max_copies=10):
+        """Copy a file, handling file naming to avoid overwrites up to a max number of copies."""
         base_path, file = os.path.split(new_path)
         if base_path == '' or base_path == '.':
             base_path = self.path  # Same directory
@@ -113,49 +119,50 @@ class FileManager:
 
         if counter <= max_copies:
             shutil.copy(os.path.join(self.path, file_name), os.path.join(base_path, file))
-            print(f'File {file_name} copied to {os.path.join(base_path, file)} successfully.')
+            if base_path == self.path:
+                self.refresh_files()
+            return f'File {file_name} copied to {os.path.join(base_path, file)} successfully.'
         else:
-            print(f'Error: Maximum number of copies ({max_copies}) reached.')
-
-        if base_path == self.path:
-            self.refresh_files()
+            return f'Error: Maximum number of copies ({max_copies}) reached.'
 
     @exception_handler        
     def create_directory(self, directory_name):
+        """Create a directory if it does not exist."""
         if directory_name in self.files:
-            print(f'Error: Directory {directory_name} already exists.')
+            return f'Error: Directory {directory_name} already exists.'
         else:
-            
             os.mkdir(directory_name)
             self.files.append(directory_name)
             self.refresh_files()
-            print(f'Directory {directory_name} created successfully.')
+            return f'Directory {directory_name} created successfully.'
 
     @exception_handler       
     def delete_directory(self, directory_name):
+        '''Delete a directory.'''
         shutil.rmtree(directory_name)
         self.files.remove(directory_name)
         self.refresh_files()
-        print(f'Directory {directory_name} deleted successfully.')
+        return f'Directory {directory_name} deleted successfully.'
         
-
     @exception_handler
     def rename_directory(self, old_name, new_name):
+        '''Rename a directory.'''	
         os.rename(old_name, new_name)
         self.files.remove(old_name)
         self.files.append(new_name)
         self.refresh_files() 
-        print(f'Directory {old_name} renamed to {new_name} successfully.')
+        return f'Directory {old_name} renamed to {new_name} successfully.'
         
     @exception_handler
     def move_directory(self, directory_name, new_path):
+        '''Move a directory.'''
         shutil.move(directory_name, new_path)
         self.refresh_files()
-        print(f'Directory {directory_name} moved to {new_path} successfully.')
+        return f'Directory {directory_name} moved to {new_path} successfully.'
     
     @exception_handler
     def copy_directory(self, directory_name, new_path, max_copies=10):
-        
+        """Copy a directory, handling directory naming to avoid overwrites up to a max number of copies."""
         base_path, directory = os.path.split(new_path)
         if base_path == '' or base_path == '.':
             base_path = self.path  # Same directory
@@ -167,29 +174,21 @@ class FileManager:
             counter += 1
 
         if counter <= max_copies:
-            try:
-                shutil.copytree(os.path.join(self.path, directory_name), os.path.join(base_path, directory))
-                print(f'Directory {directory_name} copied to {os.path.join(base_path, directory)} successfully.')
-            except shutil.Error as e:
-                print(f'Directory not copied. Error: {e}')
-            except OSError as e:
-                print(f'Directory not copied. Error: {e}')
+            shutil.copytree(os.path.join(self.path, directory_name), os.path.join(base_path, directory))
+            if base_path == self.path:
+                self.refresh_files()
+            return f'Directory {directory_name} copied to {os.path.join(base_path, directory)} successfully.'
         else:
-            print(f'Error: Maximum number of copies ({max_copies}) reached.')
-
-        if base_path == self.path:
-            self.refresh_files()
-
+            return f'Error: Maximum number of copies ({max_copies}) reached.'
 
     @exception_handler
     def list_directories(self):
+        """List all directories in the current directory."""
         directories = []
         for file in self.files:
             if os.path.isdir(file):
                 directories.append(file)
         return directories
-
-
 
 
 class CLI:
