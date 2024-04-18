@@ -32,20 +32,23 @@ def exception_handler(func):
 class Document:
     def __init__(self, file_name):
         self.file_name = file_name
-    
-    @exception_handler  
+
+    @exception_handler
     def get_file_content(self):
+        """Retrieve and return the content of the file."""
         with open(self.file_name, 'r') as file:
             return file.read()
 
     @exception_handler
     def write_to_file(self, content):
+        """Write specified content to the file."""
         with open(self.file_name, 'w') as file:
             file.write(content)
         return f'Content written to {self.file_name} successfully.'
-    
-    @exception_handler    
-    def get_file_size(self):  
+
+    @exception_handler
+    def get_file_size(self):
+        """Get the size of the file."""
         return os.path.getsize(self.file_name)
         
         
