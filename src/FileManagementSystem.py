@@ -6,56 +6,40 @@ import sys
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
-def exception_handler(verbose=False):
-    """Decorator to handle exceptions, perform logging, and conditionally provide verbose output."""
+def exception_handler():
+    """Decorator to handle exceptions and perform logging."""
     def decorator(func):
         def wrapper(*args, **kwargs):
             try:
-                result = func(*args, **kwargs)
-                if verbose:
-                    print(f'Verbosely executing {func.__name__} with arguments {args[1:]} and kwargs {kwargs}')
-                return result
+                return func(*args, **kwargs)
             except FileNotFoundError:
-                error_message = f'File or directory not found: {args[1]}'
+                error_message = f'Error: File or directory not found: {args[1]}'
                 logging.error(error_message)
-                if verbose:
-                    print(error_message)
                 return error_message
             except IsADirectoryError:
-                error_message = 'Expected a file but found a directory.'
+                error_message = 'Error: Expected a file but found a directory.'
                 logging.error(error_message)
-                if verbose:
-                    print(error_message)
                 return error_message
             except PermissionError:
-                error_message = 'Permission denied.'
+                error_message = 'Error: Permission denied.'
                 logging.error(error_message)
-                if verbose:
-                    print(error_message)
                 return error_message
             except NotADirectoryError:
-                error_message = 'Not a directory.'
+                error_message = 'Error: Not a directory.'
                 logging.error(error_message)
-                if verbose:
-                    print(error_message)
                 return error_message
             except FileExistsError:
-                error_message = 'File or directory already exists.'
+                error_message = 'Error: File or directory already exists.'
                 logging.error(error_message)
-                if verbose:
-                    print(error_message)
                 return error_message
             except Exception as e:
-                    error_message = f'An unexpected error occurred: {e}'
-                    logging.error(error_message)
-                    if verbose:
-                        print(error_message)
-                    return error_message
+                error_message = f'Error: An unexpected error occurred: {e}'
+                logging.error(error_message)
+                return error_message
         return wrapper
     return decorator
 
 
-print(os.getcwd())
 
 class Document:
     def __init__(self, file_name):
