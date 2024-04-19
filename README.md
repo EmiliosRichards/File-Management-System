@@ -2,7 +2,7 @@
 
 Hello and welcome! This document contains insight into my process of designing and building a simple File Manager! 
 
-If you would like to jump straight into using the FMS find out how [here](https://example).
+If you would like to jump straight into using the File Management System find out how [here](https://example).
 
 
 # Document Contents
