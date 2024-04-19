@@ -2,64 +2,51 @@ import os
 import shutil
 import pathlib
 import logging
-import sys
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
-def exception_handler():
+def exception_handler(func):
     """Decorator to handle exceptions and perform logging."""
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
-            except FileNotFoundError:
-                error_message = f'Error: File or directory not found: {args[1]}'
-                logging.error(error_message)
-                return error_message
-            except IsADirectoryError:
-                error_message = 'Error: Expected a file but found a directory.'
-                logging.error(error_message)
-                return error_message
-            except PermissionError:
-                error_message = 'Error: Permission denied.'
-                logging.error(error_message)
-                return error_message
-            except NotADirectoryError:
-                error_message = 'Error: Not a directory.'
-                logging.error(error_message)
-                return error_message
-            except FileExistsError:
-                error_message = 'Error: File or directory already exists.'
-                logging.error(error_message)
-                return error_message
-            except Exception as e:
-                error_message = f'Error: An unexpected error occurred: {e}'
-                logging.error(error_message)
-                return error_message
-        return wrapper
-    return decorator
+    def wrapper(*args, **kwargs):
+        try:
+            result = func(*args, **kwargs)
+            return result
+        except FileNotFoundError:
+            logging.error(f'File or directory not found: {args[1]}')
+            return f'Error: {args[1]} does not exist.'
+        except IsADirectoryError:
+            logging.error(f'Expected a file but found a directory: {args[1]}')
+            return 'Error: Expected a file but found a directory.'
+        except NotADirectoryError:
+            logging.error(f'Expected a directory but found a file: {args[1]}')
+            return 'Error: Expected a directory but found a file.'
+        except PermissionError:
+            logging.error(f'No permission to access: {args[1]}')
+            return 'Error: No permission to access the file or directory.'
+        except Exception as e:
+            logging.error(f'An unexpected error occurred: {e}')
+            return f'An unexpected error occurred: {e}'
+    return wrapper
 
-
-print(os.getcwd())
 
 class Document:
     def __init__(self, file_name):
         self.file_name = file_name
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def get_file_content(self):
         """Retrieve and return the content of the file."""
         with open(self.file_name, 'r') as file:
             return file.read()
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def write_to_file(self, content):
         """Write specified content to the file."""
         with open(self.file_name, 'w') as file:
             file.write(content)
         return f'Content written to {self.file_name} successfully.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def get_file_size(self):
         """Get the size of the file."""
         return os.path.getsize(self.file_name)
@@ -70,57 +57,55 @@ class FileManager:
     def __init__(self):
         self.path = os.getcwd()
         self.files = os.listdir(self.path)
-
+        
     def refresh_files(self):
         """Refresh the list of files in the current directory."""
         self.files = os.listdir(self.path)
 
-    @exception_handler(verbose=True)
-    def list_files(self, verbose=False):
+    @exception_handler
+    def list_files(self):  
         """List all files in the current directory."""
-        files = self.files
-        if verbose:
-            print(f"Listing all files in directory: {self.path}")
-        return files
+        return self.files
 
-    @exception_handler(verbose=True)
-    def create_file(self, file_name, verbose=False):
+    @exception_handler
+    def create_file(self, file_name):
         """Create a file if it does not exist."""
         if file_name in self.files:
-            return 'Error: File already exists.'
-        with open(file_name, 'w') as file:
-            file.write('')
-        self.files.append(file_name)
-        self.refresh_files()
-        return 'File created successfully.' if not verbose else f'File {file_name} created successfully in {self.path}.'
-
-    @exception_handler(verbose=True)
-    def delete_file(self, file_name, verbose=False):
+            return f'Error: File {file_name} already exists.'
+        else:
+            with open(file_name, 'w') as file:
+                file.write('')
+            self.files.append(file_name)
+            self.refresh_files()
+            return f'File {file_name} created successfully.'
+            
+    @exception_handler
+    def delete_file(self, file_name):
         """Delete a file."""
         os.remove(file_name)
         self.files.remove(file_name)
         self.refresh_files()
-        return 'File deleted successfully.' if not verbose else f'File {file_name} deleted from {self.path}.'
-
-    @exception_handler(verbose=True)
-    def rename_file(self, old_name, new_name, verbose=False):
+        return f'File {file_name} deleted successfully.'
+        
+    @exception_handler
+    def rename_file(self, current_filename, new_name):
         """Rename a file."""
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
+        os.rename(current_filename, new_name)
+        self.files.remove(current_filename)
         self.files.append(new_name)
         self.refresh_files()
-        return 'File renamed successfully.' if not verbose else f'File {old_name} renamed to {new_name} in {self.path}.'
-
-    @exception_handler(verbose=True)
-    def move_file(self, file_name, new_path, verbose=False):
+        return f'File {current_filename} renamed to {new_name} successfully.'
+        
+    @exception_handler
+    def move_file(self, file_name, new_path):
         """Move a file to a new path."""
         shutil.move(file_name, new_path)
         self.files.remove(file_name)
         self.refresh_files()
-        return 'File moved successfully.' if not verbose else f'File {file_name} moved to {new_path}.'
+        return f'File {file_name} moved to {new_path} successfully.'
 
-    @exception_handler(verbose=True)
-    def copy_file(self, file_name, new_path, max_copies=10, verbose=False):
+    @exception_handler
+    def copy_file(self, file_name, new_path, max_copies=10):
         """Copy a file, handling file naming to avoid overwrites up to a max number of copies."""
         base_path, file = os.path.split(new_path)
         if base_path == '' or base_path == '.':
@@ -136,46 +121,47 @@ class FileManager:
             shutil.copy(os.path.join(self.path, file_name), os.path.join(base_path, file))
             if base_path == self.path:
                 self.refresh_files()
-            return 'File copied successfully.' if not verbose else f'File {file_name} copied to {os.path.join(base_path, file)} successfully.'
+            return f'File {file_name} copied to {os.path.join(base_path, file)} successfully.'
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
 
-    @exception_handler(verbose=True)        
-    def create_directory(self, directory_name, verbose=False):
+    @exception_handler        
+    def create_directory(self, directory_name):
         """Create a directory if it does not exist."""
         if directory_name in self.files:
-            return 'Error: Directory already exists.'
-        os.mkdir(directory_name)
-        self.files.append(directory_name)
-        self.refresh_files()
-        return 'Directory created successfully.' if not verbose else f'Directory {directory_name} created successfully in {self.path}.'
+            return f'Error: Directory {directory_name} already exists.'
+        else:
+            os.mkdir(directory_name)
+            self.files.append(directory_name)
+            self.refresh_files()
+            return f'Directory {directory_name} created successfully.'
 
-    @exception_handler(verbose=True)       
-    def delete_directory(self, directory_name, verbose=False):
-        """Delete a directory."""
+    @exception_handler       
+    def delete_directory(self, directory_name):
+        '''Delete a directory.'''
         shutil.rmtree(directory_name)
         self.files.remove(directory_name)
         self.refresh_files()
-        return 'Directory deleted successfully.' if not verbose else f'Directory {directory_name} deleted from {self.path}.'
-
-    @exception_handler(verbose=True)
-    def rename_directory(self, old_name, new_name, verbose=False):
-        """Rename a directory."""
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
+        return f'Directory {directory_name} deleted successfully.'
+        
+    @exception_handler
+    def rename_directory(self, current_filename, new_name):
+        '''Rename a directory.'''	
+        os.rename(current_filename, new_name)
+        self.files.remove(current_filename)
         self.files.append(new_name)
-        self.refresh_files()
-        return 'Directory renamed successfully.' if not verbose else f'Directory {old_name} renamed to {new_name} in {self.path}.'
-
-    @exception_handler(verbose=True)
-    def move_directory(self, directory_name, new_path, verbose=False):
-        """Move a directory."""
+        self.refresh_files() 
+        return f'Directory {current_filename} renamed to {new_name} successfully.'
+        
+    @exception_handler
+    def move_directory(self, directory_name, new_path):
+        '''Move a directory.'''
         shutil.move(directory_name, new_path)
         self.refresh_files()
-        return 'Directory moved successfully.' if not verbose else f'Directory {directory_name} moved to {new_path}.'
-
-    @exception_handler(verbose=True)
-    def copy_directory(self, directory_name, new_path, max_copies=10, verbose=False):
+        return f'Directory {directory_name} moved to {new_path} successfully.'
+    
+    @exception_handler
+    def copy_directory(self, directory_name, new_path, max_copies=10):
         """Copy a directory, handling directory naming to avoid overwrites up to a max number of copies."""
         base_path, directory = os.path.split(new_path)
         if base_path == '' or base_path == '.':
@@ -191,11 +177,11 @@ class FileManager:
             shutil.copytree(os.path.join(self.path, directory_name), os.path.join(base_path, directory))
             if base_path == self.path:
                 self.refresh_files()
-            return 'Directory copied successfully.' if not verbose else f'Directory {directory_name} copied to {os.path.join(base_path, directory)} successfully.'
+            return f'Directory {directory_name} copied to {os.path.join(base_path, directory)} successfully.'
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
-        
-    @exception_handler(verbose=True)
+
+    @exception_handler
     def list_directories(self):
         """List all directories in the current directory."""
         directories = []
@@ -206,25 +192,19 @@ class FileManager:
 
 
 class CLI:
-    def __init__(self, file_manager):
-        self.file_manager = file_manager
-        self.verbose = False
+    def __init__(self):
+        self.file_manager = FileManager()
 
     def welcome_message(self):
         print('Welcome to the File Management System!')
         self.display_menu()
-
-    def toggle_verbosity(self):
-        self.verbose = not self.verbose
-        print(f"Verbose mode set to {'on' if self.verbose else 'off'}.")
 
     def display_menu(self):
         """Display the command menu to the user."""
         options = [
             "1. List files", "2. Create file", "3. Delete file", "4. Rename file",
             "5. Move file", "6. Copy file", "7. Create directory", "8. Delete directory",
-            "9. Rename directory", "10. Move directory", "11. Copy directory", "12. List directories", 
-            "13. Toggle verbosity", "14. Exit"
+            "9. Rename directory", "10. Move directory", "11. Copy directory", "12. List directories", "13. Exit"
         ]
         for option in options:
             print(option)
@@ -238,7 +218,7 @@ class CLI:
             '4': self.rename_file, '5': self.move_file, '6': self.copy_file,
             '7': self.create_directory, '8': self.delete_directory, '9': self.rename_directory,
             '10': self.move_directory, '11': self.copy_directory, '12': self.list_directories,
-            '13': self.toggle_verbosity, '14': self.exit
+            '13': self.exit
         }
         result = action.get(choice, lambda: 'Invalid choice. Please try again.')()
         if result:
@@ -251,141 +231,82 @@ class CLI:
     
     def create_file(self):
         file_name = input('Enter the name of the file you would like to create: ')
-        result = self.file_manager.create_file(file_name)
-        print(result)
+        self.file_manager.create_file(file_name)
+        print(f'File {file_name} created successfully.')
         self.display_menu()
     
     def delete_file(self):
         file_name = input('Enter the name of the file you would like to delete: ')
-        result = self.file_manager.delete_file(file_name)
-        print(result)
+        self.file_manager.delete_file(file_name)
+        print(f'File {file_name} deleted successfully.')
         self.display_menu()
     
     def rename_file(self):
         current_filename = input('Enter the name of the file you would like to rename: ')
         new_name = input('Enter the new name for the file: ')
-        result = self.file_manager.rename_file(current_filename, new_name)
-        print(result)
+        self.file_manager.rename_file(current_filename, new_name)
+        print(f'File {current_filename} renamed to {new_name} successfully.')
         self.display_menu()
 
     def move_file(self):
         file_name = input('Enter the name of the file you would like to move: ')
         new_path = input('Enter the new path for the file: ')
-        result = self.file_manager.move_file(file_name, new_path)
-        print(result)
+        self.file_manager.move_file(file_name, new_path)
+        print(f'File {file_name} moved to {new_path} successfully.')
         self.display_menu()
+
     def copy_file(self):
         file_name = input('Enter the name of the file you would like to copy: ')
         new_path = input('Enter the new path for the file: ')
-        result = self.file_manager.copy_file(file_name, new_path)
-        print(result)
+        self.file_manager.copy_file(file_name, new_path)
+        print(f'File {file_name} copied to {new_path} successfully.')
         self.display_menu()
     
     def create_directory(self):
         directory_name = input('Enter the name of the directory you would like to create: ')
-        result = self.file_manager.create_directory(directory_name)
-        print(result)
+        self.file_manager.create_directory(directory_name)
+        print(f'Directory {directory_name} created successfully.')
         self.display_menu()
     
     def delete_directory(self):
         directory_name = input('Enter the name of the directory you would like to delete: ')
-        result = self.file_manager.delete_directory(directory_name)
-        print(result)
+        self.file_manager.delete_directory(directory_name)
+        print(f'Directory {directory_name} deleted successfully.')
         self.display_menu()
 
     def rename_directory(self):
         current_filename = input('Enter the name of the directory you would like to rename: ')
         new_name = input('Enter the new name for the directory: ')
-        result = self.file_manager.rename_directory(current_filename, new_name)
-        print(result)
+        self.file_manager.rename_directory(current_filename, new_name)
+        print(f'Directory {current_filename} renamed to {new_name} successfully.')
         self.display_menu()
     
     def move_directory(self):
         directory_name = input('Enter the name of the directory you would like to move: ')
         new_path = input('Enter the new path for the directory: ')
-        result = self.file_manager.move_directory(directory_name, new_path)
-        print(result)
+        self.file_manager.move_directory(directory_name, new_path)
+        print(f'Directory {directory_name} moved to {new_path} successfully.')
         self.display_menu()
     
     def copy_directory(self):
         directory_name = input('Enter the name of the directory you would like to copy: ')
         new_path = input('Enter the new path for the directory: ')
-        result = self.file_manager.copy_directory(directory_name, new_path)
-        print(result)
+        self.file_manager.copy_directory(directory_name, new_path)
+        print(f'Directory {directory_name} copied to {new_path} successfully.')
         self.display_menu()
     
     def list_directories(self):
-        result = directories = self.file_manager.list_directories()
+        directories = self.file_manager.list_directories()
         print('Directories in the current directory:')
-        print(result)
+        for directory in directories:
+            print(directory)
         self.display_menu()
 
     def exit(self):
-        print("Exiting the application.")
-        sys.exit()
+        exit()
+
 
 if __name__ == '__main__':
     file_manager = FileManager()
     cli = CLI(file_manager)
     cli.welcome_message()
-    while True:
-        cli.display_menu()
-
-
-def test_create_file():
-    fm = FileManager()  # Assuming FileManager is already defined
-    filename = "testfile.txt"
-    
-    # Ensure file does not exist initially
-    if filename in fm.files:
-        os.remove(filename)
-    
-    # Test creating a new file
-    result = fm.create_file(filename, verbose=True)
-    assert "created successfully" in result, "File should be created successfully."
-    
-    # Clean up (delete the created file)
-    os.remove(filename)
-
-
-
-def test_error_handling():
-    fm = FileManager()
-    print(fm.delete_file("nonexistentfile.txt"))  # Should return a user-friendly error message
-    print(fm.create_file("/invalid/path/to/file.txt"))  # Should handle and return a path error message
-
-
-# test_create_file()
-# test_error_handling()
-
-
-
-
-
-
-
-
-# Example usage
-# file_manager = FileManager()
-# cli = CLI(file_manager)
-# cli.welcome_message()
-# cli.display_menu()
-# cli.list_files()
-# cli.create_file()
-# cli.delete_file()
-# cli.rename_file()
-# cli.move_file()
-# cli.copy_file()
-# cli.create_directory()
-# cli.delete_directory()
-# cli.rename_directory()
-# cli.move_directory()
-# cli.copy_directory()
-# cli.list_directories()
-# cli.toggle_verbosity()
-# cli.exit()
-
-
-
-
-
