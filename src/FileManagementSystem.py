@@ -6,59 +6,56 @@ import sys
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
-def exception_handler():
+def exception_handler(func):
     """Decorator to handle exceptions and perform logging."""
-    def decorator(func):
-        def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
-            except FileNotFoundError:
-                error_message = f'Error: File or directory not found: {args[1]}'
-                logging.error(error_message)
-                return error_message
-            except IsADirectoryError:
-                error_message = 'Error: Expected a file but found a directory.'
-                logging.error(error_message)
-                return error_message
-            except PermissionError:
-                error_message = 'Error: Permission denied.'
-                logging.error(error_message)
-                return error_message
-            except NotADirectoryError:
-                error_message = 'Error: Not a directory.'
-                logging.error(error_message)
-                return error_message
-            except FileExistsError:
-                error_message = 'Error: File or directory already exists.'
-                logging.error(error_message)
-                return error_message
-            except Exception as e:
-                error_message = f'Error: An unexpected error occurred: {e}'
-                logging.error(error_message)
-                return error_message
-        return wrapper
-    return decorator
-
+    def wrapper(*args, **kwargs):
+        try:
+            return func(*args, **kwargs)
+        except FileNotFoundError:
+            error_message = 'Error: File or directory not found.'
+            logging.error(error_message)
+            return error_message
+        except IsADirectoryError:
+            error_message = 'Error: Expected a file but found a directory.'
+            logging.error(error_message)
+            return error_message
+        except PermissionError:
+            error_message = 'Error: Permission denied.'
+            logging.error(error_message)
+            return error_message
+        except NotADirectoryError:
+            error_message = 'Error: Not a directory.'
+            logging.error(error_message)
+            return error_message
+        except FileExistsError:
+            error_message = 'Error: File or directory already exists.'
+            logging.error(error_message)
+            return error_message
+        except Exception as e:
+            error_message = f'Error: An unexpected error occurred: {e}'
+            logging.error(error_message)
+            return error_message
+    return wrapper
 
 
 class Document:
     def __init__(self, file_name):
         self.file_name = file_name
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def get_file_content(self):
         """Retrieve and return the content of the file."""
         with open(self.file_name, 'r') as file:
             return file.read()
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def write_to_file(self, content):
         """Write specified content to the file."""
         with open(self.file_name, 'w') as file:
             file.write(content)
         return f'Content written to {self.file_name} successfully.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def get_file_size(self):
         """Get the size of the file."""
         return os.path.getsize(self.file_name)
@@ -74,7 +71,7 @@ class FileManager:
         """Refresh the list of files in the current directory."""
         self.files = os.listdir(self.path)
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def list_files(self, verbose=False):
         """List all files in the current directory."""
         files = self.files
@@ -82,7 +79,7 @@ class FileManager:
             print(f"Listing all files in directory: {self.path}")
         return files
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def create_file(self, file_name, verbose=False):
         """Create a file if it does not exist."""
         if file_name in self.files:
@@ -93,7 +90,7 @@ class FileManager:
         self.refresh_files()
         return 'File created successfully.' if not verbose else f'File {file_name} created successfully in {self.path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def delete_file(self, file_name, verbose=False):
         """Delete a file."""
         os.remove(file_name)
@@ -101,7 +98,7 @@ class FileManager:
         self.refresh_files()
         return 'File deleted successfully.' if not verbose else f'File {file_name} deleted from {self.path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def rename_file(self, old_name, new_name, verbose=False):
         """Rename a file."""
         os.rename(old_name, new_name)
@@ -110,7 +107,7 @@ class FileManager:
         self.refresh_files()
         return 'File renamed successfully.' if not verbose else f'File {old_name} renamed to {new_name} in {self.path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def move_file(self, file_name, new_path, verbose=False):
         """Move a file to a new path."""
         shutil.move(file_name, new_path)
@@ -118,7 +115,7 @@ class FileManager:
         self.refresh_files()
         return 'File moved successfully.' if not verbose else f'File {file_name} moved to {new_path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def copy_file(self, file_name, new_path, max_copies=10, verbose=False):
         """Copy a file, handling file naming to avoid overwrites up to a max number of copies."""
         base_path, file = os.path.split(new_path)
@@ -139,7 +136,7 @@ class FileManager:
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
 
-    @exception_handler(verbose=True)        
+    @exception_handler        
     def create_directory(self, directory_name, verbose=False):
         """Create a directory if it does not exist."""
         if directory_name in self.files:
@@ -149,7 +146,7 @@ class FileManager:
         self.refresh_files()
         return 'Directory created successfully.' if not verbose else f'Directory {directory_name} created successfully in {self.path}.'
 
-    @exception_handler(verbose=True)       
+    @exception_handler       
     def delete_directory(self, directory_name, verbose=False):
         """Delete a directory."""
         shutil.rmtree(directory_name)
@@ -157,7 +154,7 @@ class FileManager:
         self.refresh_files()
         return 'Directory deleted successfully.' if not verbose else f'Directory {directory_name} deleted from {self.path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def rename_directory(self, old_name, new_name, verbose=False):
         """Rename a directory."""
         os.rename(old_name, new_name)
@@ -166,14 +163,14 @@ class FileManager:
         self.refresh_files()
         return 'Directory renamed successfully.' if not verbose else f'Directory {old_name} renamed to {new_name} in {self.path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def move_directory(self, directory_name, new_path, verbose=False):
         """Move a directory."""
         shutil.move(directory_name, new_path)
         self.refresh_files()
         return 'Directory moved successfully.' if not verbose else f'Directory {directory_name} moved to {new_path}.'
 
-    @exception_handler(verbose=True)
+    @exception_handler
     def copy_directory(self, directory_name, new_path, max_copies=10, verbose=False):
         """Copy a directory, handling directory naming to avoid overwrites up to a max number of copies."""
         base_path, directory = os.path.split(new_path)
@@ -194,7 +191,7 @@ class FileManager:
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
         
-    @exception_handler(verbose=True)
+    @exception_handler
     def list_directories(self):
         """List all directories in the current directory."""
         directories = []
