@@ -71,6 +71,10 @@ class FileManager:
         """Refresh the list of files in the current directory."""
         self.files = os.listdir(self.path)
 
+    def is_valid_path(path):
+        """Check if the provided path is a valid directory and writable."""
+        return os.path.exists(path) and os.path.isdir(path) and os.access(path, os.W_OK)
+
     @exception_handler
     def list_files(self, verbose=False):
         """List all files in the current directory."""
@@ -109,7 +113,12 @@ class FileManager:
 
     @exception_handler
     def move_file(self, file_name, new_path, verbose=False):
-        """Move a file to a new path."""
+        """Move a file to a new path after validating the path."""
+        if not self.is_valid_path(new_path):
+            error_message = 'Invalid or inaccessible path specified.'
+            logging.error(error_message)
+            return error_message
+ 
         shutil.move(file_name, new_path)
         self.files.remove(file_name)
         self.refresh_files()
@@ -117,6 +126,13 @@ class FileManager:
 
     @exception_handler
     def copy_file(self, file_name, new_path, max_copies=10, verbose=False):
+        
+        """Validate the path."""
+        if not self.is_valid_path(new_path):
+            error_message = 'Invalid or inaccessible path specified.'
+            logging.error(error_message)
+            return error_message 
+        
         """Copy a file, handling file naming to avoid overwrites up to a max number of copies."""
         base_path, file = os.path.split(new_path)
         if base_path == '' or base_path == '.':
@@ -165,13 +181,26 @@ class FileManager:
 
     @exception_handler
     def move_directory(self, directory_name, new_path, verbose=False):
-        """Move a directory."""
+        
+        """Move a Directory to a new path after validating the path."""
+        if not self.is_valid_path(new_path):
+            error_message = 'Invalid or inaccessible path specified.'
+            logging.error(error_message)
+            return error_message
+    
         shutil.move(directory_name, new_path)
         self.refresh_files()
         return 'Directory moved successfully.' if not verbose else f'Directory {directory_name} moved to {new_path}.'
 
     @exception_handler
     def copy_directory(self, directory_name, new_path, max_copies=10, verbose=False):
+
+        """Validate the path."""
+        if not self.is_valid_path(new_path):
+            error_message = 'Invalid or inaccessible path specified.'
+            logging.error(error_message)
+            return error_message
+        
         """Copy a directory, handling directory naming to avoid overwrites up to a max number of copies."""
         base_path, directory = os.path.split(new_path)
         if base_path == '' or base_path == '.':
