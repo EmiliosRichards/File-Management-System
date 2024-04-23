@@ -70,7 +70,8 @@ class FileManager:
     def refresh_files(self):
         """Refresh the list of files in the current directory."""
         self.files = os.listdir(self.path)
-
+    
+    @staticmethod
     def is_valid_path(path):
         """Check if the provided path is a valid directory and writable."""
         return os.path.exists(path) and os.path.isdir(path) and os.access(path, os.W_OK)
@@ -126,29 +127,36 @@ class FileManager:
 
     @exception_handler
     def copy_file(self, file_name, new_path, max_copies=10, verbose=False):
-        
-        """Validate the path."""
+        """
+        Copy a file to a new path, validating the path first and handling file naming to avoid overwrites
+        up to a maximum number of copies. If the path is invalid, log the error and return an error message.
+        """
+        # Validate the path
         if not self.is_valid_path(new_path):
             error_message = 'Invalid or inaccessible path specified.'
             logging.error(error_message)
-            return error_message 
+            return error_message
         
-        """Copy a file, handling file naming to avoid overwrites up to a max number of copies."""
+        # Split the new path into base path and file name
         base_path, file = os.path.split(new_path)
         if base_path == '' or base_path == '.':
             base_path = self.path  # Same directory
-
+        
+        # Initialize the original file and counter for copying
         original_file = file
         counter = 1
         while os.path.exists(os.path.join(base_path, file)) and counter <= max_copies:
             file = f"{os.path.splitext(original_file)[0]}_copy{counter}{os.path.splitext(original_file)[1]}"
             counter += 1
-
+        
+        # Copy the file if the maximum number of copies has not been reached
         if counter <= max_copies:
             shutil.copy(os.path.join(self.path, file_name), os.path.join(base_path, file))
             if base_path == self.path:
+                self.files.append(file)  # Explicitly add the new file name to the list
                 self.refresh_files()
-            return 'File copied successfully.' if not verbose else f'File {file_name} copied to {os.path.join(base_path, file)} successfully.'
+            success_message = f'File {file_name} copied to {os.path.join(base_path, file)} successfully.'
+            return 'File copied successfully.' if not verbose else success_message
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
 
