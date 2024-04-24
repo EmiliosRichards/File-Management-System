@@ -3,6 +3,8 @@ import shutil
 import pathlib
 import logging
 import sys
+import re
+
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -74,7 +76,30 @@ class FileManager:
     @staticmethod
     def is_valid_path(path):
         """Check if the provided path is a valid directory and writable."""
-        return os.path.exists(path) and os.path.isdir(path) and os.access(path, os.W_OK)
+        return os.path.isdir(path) and os.access(path, os.W_OK)
+    
+    @staticmethod
+    def sanitize_filename(name):
+        import os
+        # Normalize the path to prevent directory traversal
+        name = os.path.normpath(name).replace("../", "").replace("..\\\\" , "")
+        # Allow only alphanumeric, spaces, periods, underscores, and dashes
+        return ''.join(char for char in name if char.isalnum() or char in (' ', '.', '_', '-'))
+   
+    @staticmethod
+    def validate_file(file_name, existing_files, operation_type):
+        """Validate the filename based on the operation type."""
+        if not file_name:
+            return False, "Filename cannot be empty."
+        
+        file_exists = file_name in existing_files
+
+        if operation_type == 'create' and file_exists:
+            return False, "File already exists."
+        elif operation_type == 'delete' and not file_exists:
+            return False, "File does not exist."
+        
+        return True, "Filename is valid."
 
     @exception_handler
     def list_files(self, verbose=False):
@@ -86,69 +111,124 @@ class FileManager:
 
     @exception_handler
     def create_file(self, file_name, verbose=False):
-        """Create a file if it does not exist."""
-        if file_name in self.files:
-            return 'Error: File already exists.'
-        with open(file_name, 'w') as file:
-            file.write('')
-        self.files.append(file_name)
-        self.refresh_files()
-        return 'File created successfully.' if not verbose else f'File {file_name} created successfully in {self.path}.'
+        """Create a file if it does not exist, with input sanitization and validation."""
+        # Sanitize the input filename
+        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        # Validate the filename for creation
+        valid, message = FileManager.validate_file(file_name, self.files, 'create')
+        if not valid:
+            return message
+        
+        try:
+            with open(file_name, 'w') as file:
+                file.write('')
+            self.files.append(file_name)
+            self.refresh_files()
+            return 'File created successfully.' if not verbose else f'File {file_name} created successfully in {self.path}.'
+        except Exception as e:
+            return f"An error occurred while creating the file: {e}"
 
     @exception_handler
     def delete_file(self, file_name, verbose=False):
-        """Delete a file."""
-        os.remove(file_name)
-        self.files.remove(file_name)
-        self.refresh_files()
-        return 'File deleted successfully.' if not verbose else f'File {file_name} deleted from {self.path}.'
+        """Delete a file if it exists, with input sanitization and validation."""
+        # Sanitize the input filename
+        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        # Validate the filename for deletion
+        valid, message = FileManager.validate_file(file_name, self.files, 'delete')
+        if not valid:
+            return message
+
+        try:
+            os.remove(file_name)
+            self.files.remove(file_name)
+            self.refresh_files()
+            return 'File deleted successfully.' if not verbose else f'File {file_name} deleted from {self.path}.'
+        except Exception as e:
+            return f"An error occurred while deleting the file: {e}"
 
     @exception_handler
     def rename_file(self, old_name, new_name, verbose=False):
-        """Rename a file."""
-        os.rename(old_name, new_name)
-        self.files.remove(old_name)
-        self.files.append(new_name)
-        self.refresh_files()
-        return 'File renamed successfully.' if not verbose else f'File {old_name} renamed to {new_name} in {self.path}.'
+        """Rename a file, with input sanitization and validation."""
+        # Sanitize the input filenames
+        old_name = FileManager.File.Manager.sanitize_filename(old_name)
+        new_name = FileManager.File.Manager.sanitize_filename(new_name)
+        
+        # Validate the old filename for existence
+        valid_old, message_old = FileManager.validate_file(old_name, self.files, 'delete')  # Using 'delete' type for existence check
+        if not valid_old:
+            return message_old
+        
+        # Validate the new filename to ensure it does not already exist
+        valid_new, message_new = FileManager.validate_file(new_name, self.files, 'create')  # Using 'create' type for non-existence check
+        if not valid_new:
+            return message_new
+
+        try:
+            os.rename(old_name, new_name)
+            self.files.remove(old_name)
+            self.files.append(new_name)
+            self.refresh_files()
+            return 'File renamed successfully.' if not verbose else f'File {old_name} renamed to {new_name} in {self.path}.'
+        except Exception as e:
+            return f"An error occurred while renaming the file: {e}"
 
     @exception_handler
     def move_file(self, file_name, new_path, verbose=False):
-        """Move a file to a new path after validating the path."""
+        """Move a file to a new path after sanitizing the filename and validating both the filename and path."""
+        # Sanitize the input filename
+        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        
+        # Validate the filename for existence
+        valid, message = FileManager.validate_file(file_name, self.files, 'delete')  # 'delete' context used for existence check
+        if not valid:
+            return message
+
+        # Validate the new path
         if not self.is_valid_path(new_path):
             error_message = 'Invalid or inaccessible path specified.'
             logging.error(error_message)
             return error_message
- 
-        shutil.move(file_name, new_path)
-        self.files.remove(file_name)
-        self.refresh_files()
-        return 'File moved successfully.' if not verbose else f'File {file_name} moved to {new_path}.'
+
+        try:
+            shutil.move(file_name, new_path)
+            self.files.remove(file_name)
+            self.refresh_files()
+            return 'File moved successfully.' if not verbose else f'File {file_name} moved to {new_path}.'
+        except Exception as e:
+            return f"An error occurred while moving the file: {e}"
 
     @exception_handler
     def copy_file(self, file_name, new_path, max_copies=10, verbose=False):
         """
-        Copy a file to a new path, validating the path first and handling file naming to avoid overwrites
-        up to a maximum number of copies. If the path is invalid, log the error and return an error message.
+        Copy a file to a new path after sanitizing the filename and validating the path.
+        Handle file naming to avoid overwrites up to a maximum number of copies.
+        If the path is invalid, log the error and return an error message.
         """
-        # Validate the path
+        # Sanitize the input filename
+        file_name = FileManager.sanitize_filename(file_name)
+
+        # Check if the file exists in the current directory
+        if file_name not in self.files:
+            return f'Error: The file {file_name} does not exist.'
+
+        # Validate the new path
         if not self.is_valid_path(new_path):
             error_message = 'Invalid or inaccessible path specified.'
             logging.error(error_message)
             return error_message
-        
+
         # Split the new path into base path and file name
         base_path, file = os.path.split(new_path)
         if base_path == '' or base_path == '.':
-            base_path = self.path  # Same directory
-        
+            base_path = self.path  # Default to the same directory if no path specified
+
         # Initialize the original file and counter for copying
         original_file = file
         counter = 1
         while os.path.exists(os.path.join(base_path, file)) and counter <= max_copies:
             file = f"{os.path.splitext(original_file)[0]}_copy{counter}{os.path.splitext(original_file)[1]}"
             counter += 1
-        
+
         # Copy the file if the maximum number of copies has not been reached
         if counter <= max_copies:
             shutil.copy(os.path.join(self.path, file_name), os.path.join(base_path, file))
@@ -160,15 +240,23 @@ class FileManager:
         else:
             return f'Error: Maximum number of copies ({max_copies}) reached.'
 
-    @exception_handler        
+    @exception_handler
     def create_directory(self, directory_name, verbose=False):
-        """Create a directory if it does not exist."""
+        """Create a directory if it does not exist, with input sanitization and validation."""
+        # Sanitize the input directory name
+        directory_name = FileManager.sanitize_filename(directory_name)
+
+        # Check if the directory exists in the current directory
         if directory_name in self.files:
             return 'Error: Directory already exists.'
-        os.mkdir(directory_name)
-        self.files.append(directory_name)
-        self.refresh_files()
-        return 'Directory created successfully.' if not verbose else f'Directory {directory_name} created successfully in {self.path}.'
+
+        try:
+            os.mkdir(directory_name)
+            self.files.append(directory_name)
+            self.refresh_files()
+            return 'Directory created successfully.' if not verbose else f'Directory {directory_name} created successfully in {self.path}.'
+        except Exception as e:
+            return f"An error occurred while creating the directory: {e}"
 
     @exception_handler       
     def delete_directory(self, directory_name, verbose=False):
