@@ -5,12 +5,13 @@ import logging
 import sys
 import re
 import readline
-
+import functools
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
 def exception_handler(func):
     """Decorator to handle exceptions and perform logging."""
+    @functools.wraps(func)  # This preserves the name and docstring of the decorated function.
     def wrapper(*args, **kwargs):
         try:
             return func(*args, **kwargs)
