@@ -4,6 +4,7 @@ import pathlib
 import logging
 import sys
 import re
+import readline
 
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
@@ -39,6 +40,12 @@ def exception_handler(func):
             return error_message
     return wrapper
 
+def complete(text, state):
+    results = [x for x in os.listdir('.') if x.startswith(text)] + [None]
+    return results[state]
+
+readline.set_completer(complete)
+readline.parse_and_bind("tab: complete")
 
 class Document:
     def __init__(self, file_name):
@@ -80,7 +87,6 @@ class FileManager:
     
     @staticmethod
     def sanitize_filename(name):
-        import os
         # Normalize the path to prevent directory traversal
         name = os.path.normpath(name).replace("../", "").replace("..\\\\" , "")
         # Allow only alphanumeric, spaces, periods, underscores, and dashes
@@ -335,6 +341,11 @@ class CLI:
         print('Welcome to the File Management System!')
         self.display_menu()
 
+    def get_input(prompt):
+        readline.set_completer_delims(' \t\n;')
+        input_value = input(prompt)
+        return input_value
+
     def toggle_verbosity(self):
         self.verbose = not self.verbose
         print(f"Verbose mode set to {'on' if self.verbose else 'off'}.")
@@ -353,7 +364,7 @@ class CLI:
 
     def handle_input(self):
         """Handle user input from the command menu."""
-        choice = input('Enter your choice: ')
+        choice = self.get_input('Enter your choice: ')
         action = {
             '1': self.list_files, '2': self.create_file, '3': self.delete_file,
             '4': self.rename_file, '5': self.move_file, '6': self.copy_file,
@@ -371,66 +382,66 @@ class CLI:
         return self.file_manager.list_files()
     
     def create_file(self):
-        file_name = input('Enter the name of the file you would like to create: ')
+        file_name = self.get_input('Enter the name of the file you would like to create: ')
         result = self.file_manager.create_file(file_name)
         print(result)
         self.display_menu()
     
     def delete_file(self):
-        file_name = input('Enter the name of the file you would like to delete: ')
+        file_name = self.get_input('Enter the name of the file you would like to delete: ')
         result = self.file_manager.delete_file(file_name)
         print(result)
         self.display_menu()
     
     def rename_file(self):
-        current_filename = input('Enter the name of the file you would like to rename: ')
+        current_filename = self.get_input('Enter the name of the file you would like to rename: ')
         new_name = input('Enter the new name for the file: ')
         result = self.file_manager.rename_file(current_filename, new_name)
         print(result)
         self.display_menu()
 
     def move_file(self):
-        file_name = input('Enter the name of the file you would like to move: ')
-        new_path = input('Enter the new path for the file: ')
+        file_name = self.get_input('Enter the name of the file you would like to move: ')
+        new_path = self.get_input('Enter the new path for the file: ')
         result = self.file_manager.move_file(file_name, new_path)
         print(result)
         self.display_menu()
     def copy_file(self):
-        file_name = input('Enter the name of the file you would like to copy: ')
-        new_path = input('Enter the new path for the file: ')
+        file_name = self.get_input('Enter the name of the file you would like to copy: ')
+        new_path = self.get_input('Enter the new path for the file: ')
         result = self.file_manager.copy_file(file_name, new_path)
         print(result)
         self.display_menu()
     
     def create_directory(self):
-        directory_name = input('Enter the name of the directory you would like to create: ')
+        directory_name = self.get_input('Enter the name of the directory you would like to create: ')
         result = self.file_manager.create_directory(directory_name)
         print(result)
         self.display_menu()
     
     def delete_directory(self):
-        directory_name = input('Enter the name of the directory you would like to delete: ')
+        directory_name = self.get_input('Enter the name of the directory you would like to delete: ')
         result = self.file_manager.delete_directory(directory_name)
         print(result)
         self.display_menu()
 
     def rename_directory(self):
-        current_filename = input('Enter the name of the directory you would like to rename: ')
-        new_name = input('Enter the new name for the directory: ')
+        current_filename = self.get_input('Enter the name of the directory you would like to rename: ')
+        new_name = self.get_input('Enter the new name for the directory: ')
         result = self.file_manager.rename_directory(current_filename, new_name)
         print(result)
         self.display_menu()
     
     def move_directory(self):
-        directory_name = input('Enter the name of the directory you would like to move: ')
-        new_path = input('Enter the new path for the directory: ')
+        directory_name = self.get_input('Enter the name of the directory you would like to move: ')
+        new_path = self.get_input('Enter the new path for the directory: ')
         result = self.file_manager.move_directory(directory_name, new_path)
         print(result)
         self.display_menu()
     
     def copy_directory(self):
-        directory_name = input('Enter the name of the directory you would like to copy: ')
-        new_path = input('Enter the new path for the directory: ')
+        directory_name = self.get_input('Enter the name of the directory you would like to copy: ')
+        new_path = self.get_input('Enter the new path for the directory: ')
         result = self.file_manager.copy_directory(directory_name, new_path)
         print(result)
         self.display_menu()
