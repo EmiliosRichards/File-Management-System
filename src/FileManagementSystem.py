@@ -345,6 +345,24 @@ class CLI:
         readline.set_completer_delims(' \t\n;')
         input_value = input(prompt)
         return input_value
+    
+    def display_help():
+        print("""
+        1. List files - Lists all files in the current directory.
+        2. Create file - Creates a new file. Usage: 'create filename.txt'
+        3. Delete file - Deletes a file. Usage: 'delete filename.txt'
+        4. Rename file - Renames a file. Usage: 'rename oldname.txt newname.txt'
+        5. Move file - Moves a file to a new path. Usage: 'move filename.txt newpath/'
+        6. Copy file - Copies a file to a new path. Usage: 'copy filename.txt newpath/'
+        7. Create directory - Creates a new directory. Usage: 'create_dir dirname'
+        8. Delete directory - Deletes a directory. Usage: 'delete_dir dirname'
+        9. Rename directory - Renames a directory. Usage: 'rename_dir oldname newname'
+        10. Move directory - Moves a directory to a new path. Usage: 'move_dir dirname newpath/'
+        11. Copy directory - Copies a directory to a new path. Usage: 'copy_dir dirname newpath/'
+        12. List directories - Lists all directories in the current directory.
+        13. Toggle verbosity - Toggle verbose mode on or off.
+        14. Exit - Exits the application.
+        """)
 
     def toggle_verbosity(self):
         self.verbose = not self.verbose
@@ -356,7 +374,7 @@ class CLI:
             "1. List files", "2. Create file", "3. Delete file", "4. Rename file",
             "5. Move file", "6. Copy file", "7. Create directory", "8. Delete directory",
             "9. Rename directory", "10. Move directory", "11. Copy directory", "12. List directories", 
-            "13. Toggle verbosity", "14. Exit"
+            "13. Toggle verbosity", "14. Exit", "Type 'help' for more information."
         ]
         for option in options:
             print(option)
@@ -370,7 +388,7 @@ class CLI:
             '4': self.rename_file, '5': self.move_file, '6': self.copy_file,
             '7': self.create_directory, '8': self.delete_directory, '9': self.rename_directory,
             '10': self.move_directory, '11': self.copy_directory, '12': self.list_directories,
-            '13': self.toggle_verbosity, '14': self.exit
+            '13': self.toggle_verbosity, '14': self.exit, 'help': self.display_help
         }
         result = action.get(choice, lambda: 'Invalid choice. Please try again.')()
         if result:
