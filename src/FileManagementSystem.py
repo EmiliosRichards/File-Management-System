@@ -1,9 +1,7 @@
 import os
 import shutil
-import pathlib
 import logging
 import sys
-import re
 import readline
 import functools
 
