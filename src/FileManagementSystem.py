@@ -340,12 +340,12 @@ class CLI:
         print('Welcome to the File Management System!')
         self.display_menu()
 
-    def get_input(prompt):
+    def get_input(self, prompt):
         readline.set_completer_delims(' \t\n;')
         input_value = input(prompt)
         return input_value
     
-    def display_help():
+    def display_help(self):
         print("""
         1. List files - Lists all files in the current directory.
         2. Create file - Creates a new file. Usage: 'create filename.txt'
