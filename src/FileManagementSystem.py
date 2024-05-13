@@ -118,7 +118,7 @@ class FileManager:
     def create_file(self, file_name, verbose=False):
         """Create a file if it does not exist, with input sanitization and validation."""
         # Sanitize the input filename
-        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        file_name = FileManager.sanitize_filename(file_name)
         # Validate the filename for creation
         valid, message = FileManager.validate_file(file_name, self.files, 'create')
         if not valid:
@@ -137,7 +137,7 @@ class FileManager:
     def delete_file(self, file_name, verbose=False):
         """Delete a file if it exists, with input sanitization and validation."""
         # Sanitize the input filename
-        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        file_name = FileManager.sanitize_filename(file_name)
         # Validate the filename for deletion
         valid, message = FileManager.validate_file(file_name, self.files, 'delete')
         if not valid:
@@ -155,8 +155,8 @@ class FileManager:
     def rename_file(self, old_name, new_name, verbose=False):
         """Rename a file, with input sanitization and validation."""
         # Sanitize the input filenames
-        old_name = FileManager.File.Manager.sanitize_filename(old_name)
-        new_name = FileManager.File.Manager.sanitize_filename(new_name)
+        old_name = FileManager.sanitize_filename(old_name)
+        new_name = FileManager.sanitize_filename(new_name)
         
         # Validate the old filename for existence
         valid_old, message_old = FileManager.validate_file(old_name, self.files, 'delete')  # Using 'delete' type for existence check
@@ -181,7 +181,7 @@ class FileManager:
     def move_file(self, file_name, new_path, verbose=False):
         """Move a file to a new path after sanitizing the filename and validating both the filename and path."""
         # Sanitize the input filename
-        file_name = FileManager.File.Manager.sanitize_filename(file_name)
+        file_name = FileManager.sanitize_filename(file_name)
         
         # Validate the filename for existence
         valid, message = FileManager.validate_file(file_name, self.files, 'delete')  # 'delete' context used for existence check
