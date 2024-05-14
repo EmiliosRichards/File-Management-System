@@ -4,6 +4,7 @@ import logging
 import sys
 import readline
 import functools
+import time 
 
 logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -110,10 +111,8 @@ class FileManager:
     def list_files(self, verbose=False):
         """List all files in the current directory."""
         files = self.files
-        if verbose:
-            print(f"Listing all files in directory: {self.path}")
-        return files
-
+        return (f"Listing all files in directory: {self.path} \n\n"), files if verbose else files
+        
     @exception_handler
     def create_file(self, file_name, verbose=False):
         """Create a file if it does not exist, with input sanitization and validation."""
@@ -132,6 +131,8 @@ class FileManager:
             return 'File created successfully.' if not verbose else f'File {file_name} created successfully in {self.path}.'
         except Exception as e:
             return f"An error occurred while creating the file: {e}"
+    
+
 
     @exception_handler
     def delete_file(self, file_name, verbose=False):
@@ -337,7 +338,9 @@ class CLI:
         self.verbose = False
 
     def welcome_message(self):
+        os.system('cls' if os.name == 'nt' else 'clear')
         print('Welcome to the File Management System!')
+        time.sleep(2)
         self.display_menu()
 
     def get_input(self, prompt):
@@ -345,7 +348,13 @@ class CLI:
         input_value = input(prompt)
         return input_value
     
+    def clear_terminal():
+    # Clears the terminal screen.
+        os.system('cls' if os.name == 'nt' else 'clear')
+
+    
     def display_help(self):
+        CLI.clear_terminal()
         print("""
         1. List files - Lists all files in the current directory.
         2. Create file - Creates a new file. Usage: 'create filename.txt'
@@ -362,10 +371,12 @@ class CLI:
         13. Toggle verbosity - Toggle verbose mode on or off.
         14. Exit - Exits the application.
         """)
+        input("Press Enter to continue...")
 
     def toggle_verbosity(self):
         self.verbose = not self.verbose
-        print(f"Verbose mode set to {'on' if self.verbose else 'off'}.")
+        print(f"\nVerbose mode set to {'on' if self.verbose else 'off'}.")
+        time.sleep(2)
 
     def display_menu(self):
         """Display the command menu to the user."""
@@ -375,8 +386,10 @@ class CLI:
             "9. Rename directory", "10. Move directory", "11. Copy directory", "12. List directories", 
             "13. Toggle verbosity", "14. Exit", "Type 'help' for more information."
         ]
+        CLI.clear_terminal()
         for option in options:
             print(option)
+        print('\n')
         self.handle_input()
 
     def handle_input(self):
@@ -392,85 +405,124 @@ class CLI:
         result = action.get(choice, lambda: 'Invalid choice. Please try again.')()
         if result:
             print(result)
+        print('\n\n')
         self.display_menu()
 
-    def list_files(self):
+    def list_files(self, ):
         """List all files in the current directory."""
-        return self.file_manager.list_files()
-    
+        print("\n")
+        for i in self.file_manager.list_files(verbose=self.verbose):
+            print(i)
+        input("Press Enter to continue...")
+
     def create_file(self):
+        print("\n")
         file_name = self.get_input('Enter the name of the file you would like to create: ')
-        result = self.file_manager.create_file(file_name)
+        result = self.file_manager.create_file(file_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def delete_file(self):
+        print("\n")
         file_name = self.get_input('Enter the name of the file you would like to delete: ')
-        result = self.file_manager.delete_file(file_name)
+        result = self.file_manager.delete_file(file_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def rename_file(self):
+        print("\n")
         current_filename = self.get_input('Enter the name of the file you would like to rename: ')
         new_name = input('Enter the new name for the file: ')
-        result = self.file_manager.rename_file(current_filename, new_name)
+        result = self.file_manager.rename_file(current_filename, new_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
 
     def move_file(self):
+        print("\n")
         file_name = self.get_input('Enter the name of the file you would like to move: ')
         new_path = self.get_input('Enter the new path for the file: ')
-        result = self.file_manager.move_file(file_name, new_path)
+        result = self.file_manager.move_file(file_name, new_path, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     def copy_file(self):
+        print("\n")
         file_name = self.get_input('Enter the name of the file you would like to copy: ')
         new_path = self.get_input('Enter the new path for the file: ')
-        result = self.file_manager.copy_file(file_name, new_path)
+        result = self.file_manager.copy_file(file_name, new_path, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def create_directory(self):
+        print("\n")
         directory_name = self.get_input('Enter the name of the directory you would like to create: ')
-        result = self.file_manager.create_directory(directory_name)
+        result = self.file_manager.create_directory(directory_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def delete_directory(self):
+        print("\n")
         directory_name = self.get_input('Enter the name of the directory you would like to delete: ')
-        result = self.file_manager.delete_directory(directory_name)
+        result = self.file_manager.delete_directory(directory_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
 
     def rename_directory(self):
+        print("\n")
         current_filename = self.get_input('Enter the name of the directory you would like to rename: ')
         new_name = self.get_input('Enter the new name for the directory: ')
-        result = self.file_manager.rename_directory(current_filename, new_name)
+        result = self.file_manager.rename_directory(current_filename, new_name, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def move_directory(self):
+        print("\n")
         directory_name = self.get_input('Enter the name of the directory you would like to move: ')
         new_path = self.get_input('Enter the new path for the directory: ')
-        result = self.file_manager.move_directory(directory_name, new_path)
+        result = self.file_manager.move_directory(directory_name, new_path, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def copy_directory(self):
+        print("\n")
         directory_name = self.get_input('Enter the name of the directory you would like to copy: ')
         new_path = self.get_input('Enter the new path for the directory: ')
-        result = self.file_manager.copy_directory(directory_name, new_path)
+        result = self.file_manager.copy_directory(directory_name, new_path, verbose=self.verbose)
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
     
     def list_directories(self):
-        result = directories = self.file_manager.list_directories()
+        print("\n")
+        result = self.file_manager.list_directories(verbose=self.verbose)
         print('Directories in the current directory:')
         print(result)
+        print("\n")
+        time.sleep(2)
         self.display_menu()
 
     def exit(self):
         print("Exiting the application.")
+        time.sleep(2)
+        CLI.clear_terminal()
         sys.exit()
 
 if __name__ == '__main__':
