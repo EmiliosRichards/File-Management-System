@@ -2,3 +2,5 @@
 2024-05-01 18:31:59,204 - ERROR - Error: An unexpected error occurred: type object 'FileManager' has no attribute 'File'
 2024-05-01 18:32:55,471 - ERROR - Invalid or inaccessible path specified.
 2024-05-13 16:47:33,821 - ERROR - Error: An unexpected error occurred: type object 'FileManager' has no attribute 'File'
+2024-05-14 14:11:07,697 - ERROR - Error: An unexpected error occurred: can only concatenate str (not "list") to str
+2024-05-14 14:12:01,167 - ERROR - Error: An unexpected error occurred: can only concatenate str (not "list") to str
