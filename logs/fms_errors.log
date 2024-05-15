@@ -1,0 +1,4 @@
+2024-05-15 21:16:28 - ERROR - FileManagementSystem - Error: An unexpected error occurred: list_directories() got an unexpected keyword argument 'verbose'
+2024-05-15 21:16:34 - ERROR - FileManagementSystem - Error: An unexpected error occurred: list_directories() got an unexpected keyword argument 'verbose'
+2024-05-15 21:16:37 - ERROR - FileManagementSystem - Error: An unexpected error occurred: list_directories() got an unexpected keyword argument 'verbose'
+2024-05-15 21:16:44 - ERROR - FileManagementSystem - Error: An unexpected error occurred: list_directories() got an unexpected keyword argument 'verbose'

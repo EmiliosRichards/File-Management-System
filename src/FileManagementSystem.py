@@ -5,8 +5,14 @@ import sys
 import readline
 import functools
 import time 
+import logging.config
+import functools
 
-logging.basicConfig(level=logging.ERROR, filename='fms_errors.log', format='%(asctime)s - %(levelname)s - %(message)s')
+# Load the logging configuration
+logging.config.fileConfig('config/logging.conf')
+
+# Get a specific logger for this module
+logger = logging.getLogger(__name__)
 
 def exception_handler(func):
     """Decorator to handle exceptions and perform logging."""
@@ -413,6 +419,7 @@ class CLI:
         print("\n")
         for i in self.file_manager.list_files(verbose=self.verbose):
             print(i)
+        print("\n")
         input("Press Enter to continue...")
 
     def create_file(self):
@@ -512,11 +519,11 @@ class CLI:
     
     def list_directories(self):
         print("\n")
-        result = self.file_manager.list_directories(verbose=self.verbose)
+        result = self.file_manager.list_directories()
         print('Directories in the current directory:')
         print(result)
         print("\n")
-        time.sleep(2)
+        input("Press Enter to continue...")
         self.display_menu()
 
     def exit(self):
