@@ -15,17 +15,18 @@ If you would like to jump straight into using the File Management System find ou
 - **Conclusion**: Here you will find a summary of the project, how you can contribute, as well as new things I will work on in the future.
 
 
-
+---
 
 
 # Project Significance
+**The following section's were written pre-build. Project Significance + Design Phase.**
 
 ## What is a File Management System?
 
 A File Management System (FMS) enables users to manage and organise digital files efficiently. Popular examples include Windows' File Explorer and macOS's Finder. These applications offer users a wide range of management tools through a clean and intuitive interface, enhancing usability and functionality. Core FMS functions include creating, moving, renaming, deleting files and folders.
 
 
-## The Why?
+## Why Create a FMS?
 
 You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?' The answer lies in the unique learning opportunities and the abiblity to surpass the limitations of traditional systems. 
 
@@ -39,6 +40,7 @@ A custom built FMS provides the following opportunities:
 
 
 # Design Phase
+**The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
 
 ## Project Overview
 
@@ -96,7 +98,7 @@ Constant: Cancel/ back + exit appliction functionality.
 
 ![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Flowchart.png)
 
-### Code Layout
+### Example Code Structure
 
 1. Import required libraries. 
 2. Define classes.
@@ -104,11 +106,12 @@ Constant: Cancel/ back + exit appliction functionality.
 4. Account for exeption handling.
 
 
-**This covers the design phase of the project. Next, we will cover how to use the finished product, how I arrived at the completion of said product, and what I learned during the process of creating it.**
+**This covers the design phase of the project.**
 
-
+---
 
 # Building Process
+**This section was written post-build. It will cover how to use the finished product + insight into the process of its creation, future work, and more.**
 
 
 # Reflection
@@ -118,7 +121,78 @@ Constant: Cancel/ back + exit appliction functionality.
 
 # Conclusion
 
+## Installation Guide for File Management System
+
+Follow these steps to install and set up the File Management System on your computer:
+
+**Prerequisites**
+
+Before Installing, ensure you have the following software requirments: 
+
+- Python 3.8 or Higher
+- Git (for cloning repository)
+
+### Installing 
+
+**Step 1: Clone the Repository**
+
+Start by cloning the repository from GitHub. Open your terminal or command prompt and run the following command:
+
+'''bash 
+git clone https://github.com/EmiliosRichards/File-Management-System
+'''
+
+**Step 2: Navigate to the Project Directory**
+
+Change to the project directory with:
+
+'''bash
+cd File Management System
+'''
+
+**Step 3: Configure Logging and Other Settings**
+
+Navigate to the config directory:
+
+'''bash
+cd config
+'''
+Make necessary adjustments to the logging.conf file to suit your needs. This configuration file dictates how logging is handled in the application, such as the log level and file outputs.
+
+**Step 5: Run the Application**
+
+Return to the main project directory and run the application:
+
+'''bash
+cd ..
+python FileManagementSystem.py
+'''
+
+**Step 6: Testing the Installation**
+
+After installation, it’s a good idea to test basic functionalities to ensure everything is working as expected. Try listing files, creating a new file, or other basic operations.
+
+**Using the File Management System:**
+- Listing files and directories: How to list all files and separate commands for directories.
+- Creating files and directories: Steps to create a new file or directory including command syntax.
+- Deleting files and directories: Instructions on how to delete, including any flags for force deletion if implemented.
+- Renaming files and directories: Show commands needed to rename.
+- Moving files and directories: Describe how to move files or directories to a new location.
+- Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
+- Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
+
+Insert Gif here 
+### Troubleshooting
+
+If you encounter issues during the installation:
+
+- Check the Python version.
+- Ensure all paths in configuration files are correct.
+- Review error messages carefully and consult the project’s FAQ or Issues section on GitHub.
+
 ## Future Work
+
+---
 
 ## Contributions
 
@@ -136,9 +210,12 @@ Please adhere to the following steps for your contributions to be considered:
 
 For more information on how to contribute, please read the [Contributions.md](https://github.com/EmiliosRichards/File-Management-System/blob/main/Contributions.md) guide in our repository.
 
+---
 ### Licence
 
 This project is licensed under the MIT License - see the [LICENSE]([https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
+
+---
 
 ### Contact Information
 
