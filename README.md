@@ -138,35 +138,35 @@ Before Installing, ensure you have the following software requirments:
 
 Start by cloning the repository from GitHub. Open your terminal or command prompt and run the following command:
 
-'''bash 
+```bash 
 git clone https://github.com/EmiliosRichards/File-Management-System
-'''
+```
 
 **Step 2: Navigate to the Project Directory**
 
 Change to the project directory with:
 
-'''bash
+```bash
 cd File Management System
-'''
+```
 
 **Step 3: Configure Logging and Other Settings**
 
 Navigate to the config directory:
 
-'''bash
+```bash
 cd config
-'''
+```
 Make necessary adjustments to the logging.conf file to suit your needs. This configuration file dictates how logging is handled in the application, such as the log level and file outputs.
 
 **Step 5: Run the Application**
 
 Return to the main project directory and run the application:
 
-'''bash
+```bash
 cd ..
 python FileManagementSystem.py
-'''
+```
 
 **Step 6: Testing the Installation**
 
