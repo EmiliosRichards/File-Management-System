@@ -1,3 +1,6 @@
+---
+
+
 # File Management System Project
 
 Hello and welcome! This document contains insight into my process of designing and building a simple File Manager! 
@@ -7,19 +10,19 @@ If you would like to jump straight into using the File Management System find ou
 
 # Document Contents
 
-- **Project Significance**: What is a File Management System and why build your own custom File Management System
-- **Design Phase + Technical Insights**: This section will discuss some challenges I faced, what I did to overcome them.
+- [**Project Significance**](#project-significance): What is a File Management System and why build your own custom File Management System
+- [**Design Phase + Technical Insights**](#design-phase): This section will discuss some challenges I faced, what I did to overcome them.
 - **Technical Insights**: For all you nerds out there! This section will talk about technical considerations.
-- **Building Process**: Duri
+- [**Building Process**](#building-process): Duri
 - **Reflection**: During this section, we will discuss the end product, some expectations that did not turn out as planned, and all the lessons I learned on the way.
-- **Conclusion**: Here you will find a summary of the project, how you can contribute, as well as new things I will work on in the future.
+- [**Conclusion**](#conclusion): Here you will find a summary of the project, how you can contribute, as well as new things I will work on in the future.
 
 
 ---
 
+**The following section's were written pre-build. Project Significance + Design Phase.**
 
 # Project Significance
-**The following section's were written pre-build. Project Significance + Design Phase.**
 
 ## What is a File Management System?
 
@@ -39,8 +42,11 @@ A custom built FMS provides the following opportunities:
 - **Learning and Experimentation**: The development of such a system can serve as a sandbox for experimenting with python libraries, exploring data structures, and building user interfaces.
 
 
-# Design Phase
+---
+
 **The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
+
+# Design Phase
 
 ## Project Overview
 
@@ -49,6 +55,7 @@ A custom built FMS provides the following opportunities:
 **Objective**: The objective of this project is to apply the python concepts mentioned above to create a user friendly custom built file management system. This system will be designed to store, retrieve, and manage documents or records in the form of text files, acting as a simple database.
 
 **Philosophy of project**: Start Small: Begin with core functionalities that are common to all operating systems, and gradually expand features and capabilities.
+
 
 ## Tools and Libraries
 
@@ -61,6 +68,7 @@ A custom built FMS provides the following opportunities:
 - **os**: Utilized for handling basic operating system functionalities like reading and writing files, and directory manipulation.
 - **shutil**: Helps in performing high-level file operations such as copying and moving files.
 - **pathlib**: Offers an object-oriented approach to filesystem paths, making it easier to work with file paths across different operating systems.
+
 
 ## Functional Requirements
 
@@ -108,10 +116,12 @@ Constant: Cancel/ back + exit appliction functionality.
 
 **This covers the design phase of the project.**
 
+
 ---
 
-# Building Process
 **This section was written post-build. It will cover how to use the finished product + insight into the process of its creation, future work, and more.**
+
+# Building Process
 
 ## Initial Setup and Configuration
 This section of the documentation describes the preliminary steps involved in preparing the development environment and managing dependencies for the File Management System project. These initial configurations are crucial for ensuring that development proceeds smoothly and consistently across different setups.
@@ -155,6 +165,7 @@ This section of the documentation describes the preliminary steps involved in pr
        - pip:
          - example-library==2.0  # Hypothetical library if needed
      ```
+
 
 ## Architecture Design
 
@@ -233,7 +244,9 @@ The development of the File Management System was meticulously planned and execu
 
 The development of the File Management System was accompanied by rigorous testing and revision, ensuring a robust and user-friendly product. Each phase was critical in shaping the system's architecture, providing a solid foundation for future enhancements and maintenance.
 
+
 ## Any Refactoring?
+
 
 ## Testing and Quality Assurance
 
@@ -264,6 +277,7 @@ The testing strategy for the File Management System aimed to ensure basic functi
   - Although the current tests provide a solid foundation for basic operations, future development will benefit from incorporating more comprehensive integration tests and expanding the scope to include testing with simulated user interactions from a broader user base.
 
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
+
 
 ## Lessons Learned
 
@@ -300,9 +314,11 @@ Reflecting on the development of the File Management System has provided invalua
 - **Learning from Mistakes**:
   - Embraced mistakes as learning opportunities, analyzing errors to understand and correct them, which proved invaluable for personal and professional growth.
 
+
 # Conclusion
 
 This project was not just about building a functional file management system but also about personal and professional growth. The technical skills and project management insights gained have prepared me for future software development projects, emphasizing that the journey is just as important as the final product.
+
 
 ## Installation Guide for File Management System
 
@@ -374,6 +390,7 @@ If you encounter issues during the installation:
 - Ensure all paths in configuration files are correct.
 - Review error messages carefully and consult the project’s FAQ or Issues section on GitHub.
 
+
 ## Future Work
 
 The development of the File Management System has laid a robust foundation for further enhancements and related projects. Here are several directions for future development:
@@ -431,12 +448,9 @@ Please adhere to the following steps for your contributions to be considered:
 
 For more information on how to contribute, please read the [Contributions.md](https://github.com/EmiliosRichards/File-Management-System/blob/main/Contributions.md) guide in our repository.
 
----
 ### Licence
 
 This project is licensed under the MIT License - see the [LICENSE]([https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
-
----
 
 ### Contact Information
 
