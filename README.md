@@ -3,15 +3,13 @@
 
 # File Management System Project
 
-Hello and welcome! This document contains insight into my process of designing and building a simple File Manager! 
-
-If you would like to jump straight into using the File Management System find out how [here](#installation-guide-for-file-management-system).
+Welcome! This document outlines the development of a File Management System designed to manage and organize digital files efficiently. If you’re ready to start using the system, find out how [here](#installation-guide-for-file-management-system).
 
 
 # Document Contents
 
 - [**Project Significance**](#project-significance): Explains what a File Management System is and the rationale behind building a custom version.
-- [**Design Phase + Technical Insights**](#design-phase-technical-insights): Discusses challenges encountered during the design phase and the strategies used to overcome them.
+- [**Design Phase**](#design-phase-technical-insights): Outlines the initial design and planning stages of the project, focusing on the architectural decisions and technology choices made to support the development.
 - [**Building Process**](#building-process): Details the steps taken in constructing the system, focusing on development strategies and implementation.
 - [**Testing and Quality Assurance**](#testing-and-quality-assurance): Describes the testing methodologies and quality assurance processes used to ensure the system's reliability.
 - [**Lessons Learned**](#lessons-learned): Reflects on the overall project experience, highlighting unexpected outcomes and key takeaways.
@@ -21,31 +19,31 @@ If you would like to jump straight into using the File Management System find ou
 ---
 
 
-# Project Significance
+# Project Significance 
 
-- **The following section's were written pre-build. Project Significance + Design Phase.**
 ## What is a File Management System?
 
-A File Management System (FMS) enables users to manage and organise digital files efficiently. Popular examples include Windows' File Explorer and macOS's Finder. These applications offer users a wide range of management tools through a clean and intuitive interface, enhancing usability and functionality. Core FMS functions include creating, moving, renaming, deleting files and folders.
-
+A File Management System (FMS) like Windows' File Explorer or macOS's Finder enables efficient management and organization of digital files. Such systems provide tools for creating, moving, renaming, and deleting files and folders through a user-friendly interface.
 
 ## Why Create a FMS?
 
-You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?' The answer lies in the unique learning opportunities and the abiblity to surpass the limitations of traditional systems. 
+"You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?'" The answer lies in the unique learning opportunities and the ablity to surpass the limitations of traditional systems. 
 
-A custom built FMS provides the following opportunities:
+A custom-built FMS provides the following opportunities:
 
-- **Edicational Tool**: A lesson in object oriented programming, file IO, and exception handling.
-- **Customized Workflow**: Create tailor made functionalities for specific needs.
-- **Cross Platform Compatibility**: Can be designed to work across different operating systems.
-- **Automation**: Automate routine tasks.
-- **Learning and Experimentation**: The development of such a system can serve as a sandbox for experimenting with python libraries, exploring data structures, and building user interfaces.
+- **Educational Tool**: It serves as a practical application of object-oriented programming, file I/O, and exception handling.
+- **Customized Workflow**: Tailors functionality to specific user needs, enhancing workflow efficiency.
+- **Cross-Platform Compatibility**: Ensures functionality across different operating systems, broadening user reach.
+- **Automation**: Facilitates the automation of routine tasks, saving time and reducing errors.
+- **Learning and Experimentation**: Provides a sandbox for experimenting with Python libraries, exploring new data structures, and developing user interfaces.
+
+This project not only enhances technical skills but also surpasses the limitations of traditional file management systems, offering a tailored approach to file management.
 
 
 ---
 
 
-# Design Phase
+# Design Phase (Pre-build)
 
 - **The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
 
@@ -61,7 +59,7 @@ A custom built FMS provides the following opportunities:
 ## Tools and Libraries
 
 ### Development Environment
-- **Python**: This projects primary programming language, known for its readability and broad support for tasks ranging from web development to automation.
+- **Python**: This project's primary programming language, known for its readability and broad support for tasks ranging from web development to automation.
 - **GitHub**: Used for version control, tracking changes, and managing project iterations.
 - **Coding IDE**: Essential for writing, testing, and debugging code. Use of an IDE that supports Python and integrates well with GitHub allows for seamless development.
 
@@ -121,9 +119,9 @@ Constant: Cancel/ back + exit appliction functionality.
 ---
 
 
-# Building Process
+# Building Process (Post-build)
 
-- **This section was written post-build. It will cover how to use the finished product + insight into the process of its creation, future work, and more.**
+- **This section, written after the completion of the build, details the actual construction process of the File Management System. It covers the implementation stages, from initial setup to final adjustments, and reflects on the integration of the planned features and functionalities.**
 
 ## Initial Setup and Configuration
 This section of the documentation describes the preliminary steps involved in preparing the development environment and managing dependencies for the File Management System project. These initial configurations are crucial for ensuring that development proceeds smoothly and consistently across different setups.
