@@ -10,20 +10,20 @@ If you would like to jump straight into using the File Management System find ou
 
 # Document Contents
 
-- [**Project Significance**](#project-significance): What is a File Management System and why build your own custom File Management System
-- [**Design Phase + Technical Insights**](#design-phase): This section will discuss some challenges I faced, what I did to overcome them.
-- **Technical Insights**: For all you nerds out there! This section will talk about technical considerations.
-- [**Building Process**](#building-process): Duri
-- **Reflection**: During this section, we will discuss the end product, some expectations that did not turn out as planned, and all the lessons I learned on the way.
-- [**Conclusion**](#conclusion): Here you will find a summary of the project, how you can contribute, as well as new things I will work on in the future.
+- [**Project Significance**](#project-significance): Explains what a File Management System is and the rationale behind building a custom version.
+- [**Design Phase + Technical Insights**](#design-phase-technical-insights): Discusses challenges encountered during the design phase and the strategies used to overcome them.
+- [**Building Process**](#building-process): Details the steps taken in constructing the system, focusing on development strategies and implementation.
+- [**Testing and Quality Assurance**](#testing-and-quality-assurance): Describes the testing methodologies and quality assurance processes used to ensure the system's reliability.
+- [**Lessons Learned**](#lessons-learned): Reflects on the overall project experience, highlighting unexpected outcomes and key takeaways.
+- [**Conclusion**](#conclusion): Provides a summary of the project, opportunities for contribution, and future directions for related work.
 
-
+  
 ---
 
-**The following section's were written pre-build. Project Significance + Design Phase.**
 
 # Project Significance
 
+- **The following section's were written pre-build. Project Significance + Design Phase.**
 ## What is a File Management System?
 
 A File Management System (FMS) enables users to manage and organise digital files efficiently. Popular examples include Windows' File Explorer and macOS's Finder. These applications offer users a wide range of management tools through a clean and intuitive interface, enhancing usability and functionality. Core FMS functions include creating, moving, renaming, deleting files and folders.
@@ -44,9 +44,10 @@ A custom built FMS provides the following opportunities:
 
 ---
 
-**The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
 
 # Design Phase
+
+- **The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
 
 ## Project Overview
 
@@ -119,9 +120,10 @@ Constant: Cancel/ back + exit appliction functionality.
 
 ---
 
-**This section was written post-build. It will cover how to use the finished product + insight into the process of its creation, future work, and more.**
 
 # Building Process
+
+- **This section was written post-build. It will cover how to use the finished product + insight into the process of its creation, future work, and more.**
 
 ## Initial Setup and Configuration
 This section of the documentation describes the preliminary steps involved in preparing the development environment and managing dependencies for the File Management System project. These initial configurations are crucial for ensuring that development proceeds smoothly and consistently across different setups.
@@ -245,14 +247,14 @@ The development of the File Management System was meticulously planned and execu
 The development of the File Management System was accompanied by rigorous testing and revision, ensuring a robust and user-friendly product. Each phase was critical in shaping the system's architecture, providing a solid foundation for future enhancements and maintenance.
 
 
-## Any Refactoring?
+# Any Refactoring?
 
 
-## Testing and Quality Assurance
+# Testing and Quality Assurance
 
 The testing strategy for the File Management System aimed to ensure basic functionality and stability through a combination of scripted tests and hands-on experimentation. The approach was designed to be pragmatic, focusing on the essential operations of the system within the scope of its intended use.
 
-### Scripted Testing
+## Scripted Testing
 
 - **Framework and Methodology**:
   - We utilized PyTest for our testing framework due to its robustness and flexibility in handling a variety of test cases. The tests were primarily focused on mocking the filesystem interactions to prevent any changes to the actual file system, ensuring that tests could be conducted safely and repeatedly.
@@ -260,7 +262,7 @@ The testing strategy for the File Management System aimed to ensure basic functi
 - **Implementation**:
   - The scripted tests covered basic file operations such as creating, listing, deleting, and moving files. These tests employed `unittest.mock` to simulate the environment and test the functionality in isolation. For example, `os.listdir` and `os.remove` were mocked to verify the system’s response to file listing and deletion commands without accessing the real filesystem.
 
-### Informal User Testing
+## Informal User Testing
 
 - **Hands-on Exploration**:
   - In addition to scripted tests, the system underwent informal testing through direct usage by myself. This hands-on approach allowed me to interact with the system as a typical user might, identifying usability issues and confirming the practical functionality of command-line operations.
@@ -268,7 +270,7 @@ The testing strategy for the File Management System aimed to ensure basic functi
 - **Scope and Limitations**:
   - While this method provided valuable insights into the user experience and immediate system response, it was limited in scope. Testing was confined to common usage scenarios and didn't extensively cover edge cases or complex error conditions. The testing ensured that the system performed well for typical tasks within the constraints of its current functionality and design.
 
-### Testing Outcomes
+## Testing Outcomes
 
 - **Results and Adjustments**:
   - The testing phase led to several refinements, particularly in improving the clarity of command outputs and error messages. It also confirmed the necessity of certain features, like file name sanitization, to enhance security.
@@ -279,11 +281,11 @@ The testing strategy for the File Management System aimed to ensure basic functi
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
 
 
-## Lessons Learned
+# Lessons Learned
 
 Reflecting on the development of the File Management System has provided invaluable insights into both technical skills and project management strategies. Here’s a breakdown of the key lessons learned:
 
-### Technical Skills
+## Technical Skills
 
 - **Programming and System Design**:
   - Enhanced understanding of Python, particularly in file handling, exception management, and utilizing libraries like `os` and `shutil`.
@@ -295,7 +297,7 @@ Reflecting on the development of the File Management System has provided invalua
 - **Security Considerations**:
   - Learned to incorporate security at every step, implementing measures like name sanitization and permission checks to prevent directory traversal attacks and other security vulnerabilities.
 
-### Project Management Insights
+## Project Management Insights
 
 - **Scope Management**:
   - Learned the importance of defining and adhering to project scope to avoid feature creep and ensure timely delivery of the core functionalities.
@@ -306,7 +308,7 @@ Reflecting on the development of the File Management System has provided invalua
 - **Time Management**:
   - Enhanced time management skills by setting realistic deadlines and milestones, balancing project development with other responsibilities.
 
-### Personal Growth
+## Personal Growth
 
 - **Resilience and Problem-Solving**:
   - Faced numerous challenges that improved resilience and problem-solving skills, learning to address technical issues and design dilemmas effectively.
@@ -404,7 +406,7 @@ The development of the File Management System has laid a robust foundation for f
   - Extend the system to handle files over a network. This would allow users to manage files across different systems or in a cloud-based environment, significantly expanding the utility of the application.
 
 - **Advanced File Operations**:
-  - Incorporate advanced file operations such as batch processing, where users can perform actions on multiple files simultaneously. Adding features for compressing and decompressing files could also be valuable.
+  - Incorporate advanced file operations such as batch processing, where users can perform actioEns on multiple files simultaneously. Adding features for compressing and decompressing files could also be valuable.
 
 - **Plugin Architecture**:
   - Implement a plugin architecture to allow other developers to extend the functionality of the system without modifying its core. This could lead to a rich ecosystem of plugins for various custom operations.
