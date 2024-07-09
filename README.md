@@ -313,6 +313,8 @@ The development of the File Management System was accompanied by rigorous testin
 
 # Testing and Quality Assurance
 
+ADD SOME GIF
+
 The testing strategy for the File Management System aimed to ensure basic functionality and stability through a combination of scripted tests and hands-on experimentation. The approach was designed to be pragmatic, focusing on the essential operations of the system within the scope of its intended use.
 
 ## Scripted Testing
@@ -388,6 +390,7 @@ Reflecting on the development of the File Management System has provided invalua
 
 This project was not just about building a functional file management system but also about personal and professional growth. The technical skills and project management insights gained have prepared me for future software development projects, emphasizing that the journey is just as important as the final product.
 
+ADD CUTE PIC
 
 ## Future Work
 
