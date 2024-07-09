@@ -91,6 +91,9 @@ If you encounter issues during the installation:
 - Review error messages carefully and consult the project’s FAQ or Issues section on GitHub.
 
 
+---
+
+
 # Project Significance 
 
 ## What is a File Management System?
