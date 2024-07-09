@@ -8,6 +8,7 @@ Welcome! This document outlines the development of a File Management System desi
 
 # Document Contents
 
+- [**Installation Guide for File Management System**](#installation-guide-for-file-management-system): Walks through the steps needed to install and use the File Management System.
 - [**Project Significance**](#project-significance): Explains what a File Management System is and the rationale behind building a custom version.
 - [**Design Phase**](#design-phase-technical-insights): Outlines the initial design and planning stages of the project, focusing on the architectural decisions and technology choices made to support the development.
 - [**Building Process**](#building-process): Details the steps taken in constructing the system, focusing on development strategies and implementation.
@@ -17,6 +18,77 @@ Welcome! This document outlines the development of a File Management System desi
 
   
 ---
+
+
+# Installation Guide for File Management System
+
+Follow these steps to install and set up the File Management System on your computer:
+
+**Prerequisites**
+
+Before Installing, ensure you have the following software requirments: 
+
+- Python 3.8 or Higher
+- Git (for cloning repository)
+
+### Installing 
+
+**Step 1: Clone the Repository**
+
+Start by cloning the repository from GitHub. Open your terminal or command prompt and run the following command:
+
+```bash 
+git clone https://github.com/EmiliosRichards/File-Management-System
+```
+
+**Step 2: Navigate to the Project Directory**
+
+Change to the project directory with:
+
+```bash
+cd File Management System
+```
+
+**Step 3: Configure Logging and Other Settings**
+
+Navigate to the config directory:
+
+```bash
+cd config
+```
+Make necessary adjustments to the logging.conf file to suit your needs. This configuration file dictates how logging is handled in the application, such as the log level and file outputs.
+
+**Step 5: Run the Application**
+
+Return to the main project directory and run the application:
+
+```bash
+cd ..
+python FileManagementSystem.py
+```
+
+**Step 6: Testing the Installation**
+
+After installation, it’s a good idea to test basic functionalities to ensure everything is working as expected. Try listing files, creating a new file, or other basic operations.
+
+**Using the File Management System:**
+- Listing files and directories: How to list all files and separate commands for directories.
+- Creating files and directories: Steps to create a new file or directory including command syntax.
+- Deleting files and directories: Instructions on how to delete, including any flags for force deletion if implemented.
+- Renaming files and directories: Show commands needed to rename.
+- Moving files and directories: Describe how to move files or directories to a new location.
+- Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
+- Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
+
+Insert Gif here 
+
+### Troubleshooting
+
+If you encounter issues during the installation:
+
+- Check the Python version.
+- Ensure all paths in configuration files are correct.
+- Review error messages carefully and consult the project’s FAQ or Issues section on GitHub.
 
 
 # Project Significance 
@@ -315,77 +387,6 @@ Reflecting on the development of the File Management System has provided invalua
 # Conclusion
 
 This project was not just about building a functional file management system but also about personal and professional growth. The technical skills and project management insights gained have prepared me for future software development projects, emphasizing that the journey is just as important as the final product.
-
-
-## Installation Guide for File Management System
-
-Follow these steps to install and set up the File Management System on your computer:
-
-**Prerequisites**
-
-Before Installing, ensure you have the following software requirments: 
-
-- Python 3.8 or Higher
-- Git (for cloning repository)
-
-### Installing 
-
-**Step 1: Clone the Repository**
-
-Start by cloning the repository from GitHub. Open your terminal or command prompt and run the following command:
-
-```bash 
-git clone https://github.com/EmiliosRichards/File-Management-System
-```
-
-**Step 2: Navigate to the Project Directory**
-
-Change to the project directory with:
-
-```bash
-cd File Management System
-```
-
-**Step 3: Configure Logging and Other Settings**
-
-Navigate to the config directory:
-
-```bash
-cd config
-```
-Make necessary adjustments to the logging.conf file to suit your needs. This configuration file dictates how logging is handled in the application, such as the log level and file outputs.
-
-**Step 5: Run the Application**
-
-Return to the main project directory and run the application:
-
-```bash
-cd ..
-python FileManagementSystem.py
-```
-
-**Step 6: Testing the Installation**
-
-After installation, it’s a good idea to test basic functionalities to ensure everything is working as expected. Try listing files, creating a new file, or other basic operations.
-
-**Using the File Management System:**
-- Listing files and directories: How to list all files and separate commands for directories.
-- Creating files and directories: Steps to create a new file or directory including command syntax.
-- Deleting files and directories: Instructions on how to delete, including any flags for force deletion if implemented.
-- Renaming files and directories: Show commands needed to rename.
-- Moving files and directories: Describe how to move files or directories to a new location.
-- Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
-- Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
-
-Insert Gif here 
-
-### Troubleshooting
-
-If you encounter issues during the installation:
-
-- Check the Python version.
-- Ensure all paths in configuration files are correct.
-- Review error messages carefully and consult the project’s FAQ or Issues section on GitHub.
 
 
 ## Future Work
