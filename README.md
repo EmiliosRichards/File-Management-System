@@ -180,13 +180,6 @@ Constant: Cancel/ back + exit appliction functionality.
 
 ![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Flowchart.png)
 
-### Example Code Structure
-
-1. Import required libraries. 
-2. Define classes.
-3. Implement file operations. 
-4. Account for exeption handling.
-
 
 **This covers the design phase of the project.**
 
@@ -320,6 +313,9 @@ The development of the File Management System was meticulously planned and execu
 The development of the File Management System was accompanied by rigorous testing and revision, ensuring a robust and user-friendly product. Each phase was critical in shaping the system's architecture, providing a solid foundation for future enhancements and maintenance.
 
 
+---
+
+
 # Testing and Quality Assurance
 
 The testing strategy for the File Management System aimed to ensure basic functionality and stability through a combination of scripted tests and hands-on experimentation. The approach was designed to be pragmatic, focusing on the essential operations of the system within the scope of its intended use.
@@ -349,6 +345,9 @@ The testing strategy for the File Management System aimed to ensure basic functi
   - Although the current tests provide a solid foundation for basic operations, future development will benefit from incorporating more comprehensive integration tests and expanding the scope to include testing with simulated user interactions from a broader user base.
 
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
+
+
+---
 
 
 # Lessons Learned
@@ -385,6 +384,9 @@ Reflecting on the development of the File Management System has provided invalua
 
 - **Learning from Mistakes**:
   - Embraced mistakes as learning opportunities, analyzing errors to understand and correct them, which proved invaluable for personal and professional growth.
+
+
+---
 
 
 # Conclusion
