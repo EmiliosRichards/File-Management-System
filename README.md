@@ -80,7 +80,7 @@ After installation, it’s a good idea to test basic functionalities to ensure e
 - Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
 - Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
 
-Insert Gif here 
+Insert Gif here + Example Usage 
 
 ### Troubleshooting
 
@@ -274,8 +274,6 @@ This section delves into the architectural choices and data handling strategies 
 This architecture ensures that the File Management System is not only functional but also robust and user-friendly, catering to the needs of advanced users who prefer a command-line environment for file management tasks.
 
 ## Core Development Phases
-The development of the File Management System was structured into distinct phases, each focusing on a set of functionalities that build upon each other. This phased approach allowed for incremental development and testing, ensuring stability and functionality at each step.
-
 The development of the File Management System was meticulously planned and executed in phases, each designed to incrementally build the system's capabilities while integrating the necessary learning and problem-solving along the way.
 
 ### Phase 1: Basic File Operations and Class Structure
@@ -284,9 +282,6 @@ The development of the File Management System was meticulously planned and execu
   - **Document Class**: Initially, a `Document` class was developed to handle operations on single documents, including reading, writing, and retrieving file sizes. Although these functionalities were ultimately not included in the final product, this class laid the foundational work for handling files.
   - **FileManager Class**: This class was designed to handle broader file operations such as moving, listing, and deleting files and directories. It serves as the backbone of the system, managing the core functionalities.
   - **CLI Class**: Developed towards the end of this phase, the CLI class encapsulates the user interface logic, handling user input and managing the display of outputs and messages.
-
-- **Learning and Research**:
-  - During this phase, substantial time was invested in researching best practices and learning new techniques essential for overcoming implementation challenges. This ongoing learning process was integral to the successful development of the system.
 
 ### Phase 2: Advanced Features and System Integration
 
@@ -407,10 +402,7 @@ The development of the File Management System has laid a robust foundation for f
   - Extend the system to handle files over a network. This would allow users to manage files across different systems or in a cloud-based environment, significantly expanding the utility of the application.
 
 - **Advanced File Operations**:
-  - Incorporate advanced file operations such as batch processing, where users can perform actioEns on multiple files simultaneously. Adding features for compressing and decompressing files could also be valuable.
-
-- **Plugin Architecture**:
-  - Implement a plugin architecture to allow other developers to extend the functionality of the system without modifying its core. This could lead to a rich ecosystem of plugins for various custom operations.
+  - Incorporate advanced file operations such as batch processing, where users can perform actions on multiple files simultaneously. Adding features for compressing and decompressing files could also be valuable.
 
 - **Security Enhancements**:
   - Enhance the security features of the system, such as encrypted file operations and more robust permission handling, to make the system suitable for sensitive or enterprise environments.
@@ -422,9 +414,6 @@ The development of the File Management System has laid a robust foundation for f
 
 - **Data Backup and Recovery Tool**:
   - Create a comprehensive tool for data backup and recovery that can interface with various storage devices and cloud services, providing automated backup solutions and easy recovery options.
-
-- **Cross-Platform File Synchronization Service**:
-  - Develop a service that synchronizes files across various devices, operating systems, and cloud platforms, ensuring users have up-to-date files regardless of their device or location.
 
 ### Research Opportunities
 
