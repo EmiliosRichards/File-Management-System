@@ -80,7 +80,7 @@ After installation, it’s a good idea to test basic functionalities to ensure e
 - Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
 - Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
 
-Insert Gif here + Example Usage 
+![Example Usage](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Example-Usage)
 
 ### Troubleshooting
 
