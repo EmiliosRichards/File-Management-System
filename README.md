@@ -71,6 +71,8 @@ python FileManagementSystem.py
 
 After installation, it’s a good idea to test basic functionalities to ensure everything is working as expected. Try listing files, creating a new file, or other basic operations.
 
+![Example Usage](Files/ExampleUsage.gif)
+
 **Using the File Management System:**
 - Listing files and directories: How to list all files and separate commands for directories.
 - Creating files and directories: Steps to create a new file or directory including command syntax.
@@ -80,7 +82,6 @@ After installation, it’s a good idea to test basic functionalities to ensure e
 - Copying files and directories: Explain how users can copy files, including syntax and any specific flags for recursive copying or limitations on the number of copies.
 - Toggle verbosity: Guide on how to toggle verbosity to get more detailed output for commands, useful for debugging or understanding system actions.
 
-![Example Usage](Files/ExampleUsage.gif)
 
 ### Troubleshooting
 
