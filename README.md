@@ -237,6 +237,11 @@ This section of the documentation describes the preliminary steps involved in pr
          - example-library==2.0  # Hypothetical library if needed
      ```
 
+### GitHub Project Planner
+
+Utilized the Projects secction of GitHub for planning and coordinating development.
+
+![Projects GitHub](Files/Projects.jpeg)
 
 ## Architecture Design
 
