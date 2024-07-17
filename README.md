@@ -192,6 +192,8 @@ Constant: Cancel/ back + exit appliction functionality.
 
 - **This section, written after the completion of the build, details the actual construction process of the File Management System. It covers the implementation stages, from initial setup to final adjustments, and reflects on the integration of the planned features and functionalities.**
 
+- To view the Finished Code Click [Here](src/FileManagementSystem.py)
+
 ## Initial Setup and Configuration
 This section of the documentation describes the preliminary steps involved in preparing the development environment and managing dependencies for the File Management System project. These initial configurations are crucial for ensuring that development proceeds smoothly and consistently across different setups.
 
@@ -314,8 +316,6 @@ The development of the File Management System was accompanied by rigorous testin
 
 # Testing and Quality Assurance
 
-ADD SOME GIF
-
 The testing strategy for the File Management System aimed to ensure basic functionality and stability through a combination of scripted tests and hands-on experimentation. The approach was designed to be pragmatic, focusing on the essential operations of the system within the scope of its intended use.
 
 ## Scripted Testing
@@ -344,6 +344,9 @@ The testing strategy for the File Management System aimed to ensure basic functi
 
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
 
+To view the a test click its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
+
+![Example of test](files/Test.gif)
 
 ---
 
@@ -351,6 +354,14 @@ This testing approach reflects a balance between thoroughness and practicality, 
 # Lessons Learned
 
 Reflecting on the development of the File Management System has provided invaluable insights into both technical skills and project management strategies. Here’s a breakdown of the key lessons learned:
+
+## Personal Growth
+
+- **Resilience and Problem-Solving**:
+  - Faced numerous challenges that improved resilience and problem-solving skills, learning to address technical issues and design dilemmas effectively.
+
+- **Learning from Mistakes**:
+  - Embraced mistakes as learning opportunities, analyzing errors to understand and correct them, which proved invaluable for personal and professional growth.
 
 ## Technical Skills
 
@@ -360,28 +371,10 @@ Reflecting on the development of the File Management System has provided invalua
 
 - **Unit Testing and Quality Assurance**:
   - Developed proficiency in writing unit tests with PyTest and learned effective techniques for mocking system dependencies, ensuring tests do not alter the filesystem.
+  - Debugging Mock Tests - During the development and testing of the FileManager class, I encountered issues with mock tests, particularly related to path handling on different operating systems. One key lesson learned was the importance of using platform-independent functions like os.path.join to construct file paths in both the code and tests. This ensures consistency and prevents errors caused by differing path separators (/ vs. \\). Additionally, I realized the necessity of carefully setting up and validating mock objects and methods to accurately simulate file system behavior and ensure the reliability of our tests. This debugging process highlighted the need for thorough validation and adaptability in testing practices to accommodate different environments.
 
 - **Security Considerations**:
   - Learned to incorporate security at every step, implementing measures like name sanitization and permission checks to prevent directory traversal attacks and other security vulnerabilities.
-
-## Project Management Insights
-
-- **Scope Management**:
-  - Learned the importance of defining and adhering to project scope to avoid feature creep and ensure timely delivery of the core functionalities.
-
-- **Iterative Development and Feedback**:
-  - Adopted an iterative development process, which allowed for continuous improvements based on real-time testing and feedback, aligning the project more closely with user needs.
-
-- **Time Management**:
-  - Enhanced time management skills by setting realistic deadlines and milestones, balancing project development with other responsibilities.
-
-## Personal Growth
-
-- **Resilience and Problem-Solving**:
-  - Faced numerous challenges that improved resilience and problem-solving skills, learning to address technical issues and design dilemmas effectively.
-
-- **Learning from Mistakes**:
-  - Embraced mistakes as learning opportunities, analyzing errors to understand and correct them, which proved invaluable for personal and professional growth.
 
 
 ---
