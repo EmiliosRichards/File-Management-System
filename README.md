@@ -346,7 +346,7 @@ This testing approach reflects a balance between thoroughness and practicality, 
 
 To view a test click on its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
 
-![Example of test](files/Test.gif)
+![Example of test](Files/Test.gif)
 
 ---
 
