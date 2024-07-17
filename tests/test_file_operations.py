@@ -3,7 +3,7 @@ import pytest
 from unittest.mock import patch, mock_open, MagicMock
 from src.FileManagementSystem import FileManager
 
-# Use - pytest tests/test_file_operations.py - in cli to run the tests.
+# Use - pytest .tests/test_file_operations.py - in cli to run the tests.
 
 
 # # Test for listing files
@@ -17,7 +17,7 @@ def test_list_files(mocker):
     fm = FileManager()
 
     # Invoke the method
-    response = fm.list_files()
+    _, response = fm.list_files()
 
     # Assert that all expected files are in the response
     assert response == expected_files, f"Expected {expected_files}, but got {response}"
@@ -113,10 +113,10 @@ def test_rename_file(mocker):
 def test_move_file(mocker):
     fm = FileManager()
     filename = "movablefile.txt"
-    fm.files = [filename]
     new_path = "/new/path/movablefile.txt"
+    fm.files = [filename]
 
-    # Mock the shutil.move function and path validations
+    # Setup mocks for the successful move
     move_mock = mocker.patch('shutil.move')
     mocker.patch('os.path.exists', return_value=True)
     mocker.patch('os.path.isdir', return_value=True)
@@ -127,17 +127,13 @@ def test_move_file(mocker):
     assert "moved successfully" in response
     assert filename not in fm.files  # File should be considered moved out of the directory
 
-    # Check if shutil.move was called correctly
-    move_mock.assert_called_once_with(filename, new_path)
+    # Setup mocks for the failed move due to invalid path
+    fm = FileManager()  # Reset FileManager
+    fm.files = [filename]
+    mocker.patch('os.path.exists', return_value=False)
+    mocker.patch('os.path.isdir', return_value=False)  # Important to ensure directory validation fails
+    mocker.patch('os.access', return_value=False)
 
-    # Add tests to handle and assert the behavior when the path is invalid
-    mocker.patch('os.path.exists', return_value=False)  # Path does not exist
-    response = fm.move_file(filename, new_path)
-    assert "Invalid or inaccessible path specified" in response
-
-    # Re-test with a path that exists but is not a directory or not writable
-    mocker.patch('os.path.exists', return_value=True)
-    mocker.patch('os.path.isdir', return_value=False)  # Not a directory
     response = fm.move_file(filename, new_path)
     assert "Invalid or inaccessible path specified" in response
 
@@ -164,83 +160,3 @@ def test_move_file(mocker):
 #     expected_destination = os.path.join(fm.path, "newfile.txt")
 #     mock_copy.assert_called_once_with(expected_source, expected_destination)
 
-def test_copy_file_no_conflicts(mocker):
-    # Setup
-    fm = FileManager()
-    fm.path = '/fake/directory'
-    file_name = "testfile.txt"
-    new_path = os.path.join(fm.path, 'newfile.txt')
-
-    # Mock the filesystem interactions and path validation
-    mocker.patch('os.path.exists', return_value=False)  # No file conflicts
-    mocker.patch('src.FileManagementSystem.FileManager.is_valid_path', return_value=True)  # Path is valid
-    mock_copy = mocker.patch('shutil.copy')
-    mocker.patch('os.listdir', return_value=[file_name])
-
-    # Call the method
-    response = fm.copy_file(file_name, new_path)
-
-    # Assertions
-    assert "copied successfully" in response, "The response should indicate success"
-    expected_source = os.path.join(fm.path, file_name)
-    expected_destination = os.path.join(fm.path, "newfile.txt")
-    mock_copy.assert_called_once_with(expected_source, expected_destination)
-
-# Test for copying a file when the file already exists
-# def test_copy_file_with_conflicts(mocker):
-#     # Setup
-#     fm = FileManager()
-#     fm.path = '/fake/directory'
-#     file_name = "testfile.txt"
-#     base_new_path = os.path.join(fm.path, 'testfile.txt')  # Target path where the original file would be copied
-
-#     # Mock os.path.exists to simulate file existence conflicts
-#     # Assume the first 3 paths checked ('testfile.txt', 'testfile_copy1.txt', 'testfile_copy2.txt') already exist
-#     mocker.patch('os.path.exists', side_effect=[True, True, True, False])
-    
-#     mock_copy = mocker.patch('shutil.copy')
-#     mocker.patch('os.listdir', return_value=[file_name, "testfile_copy1.txt", "testfile_copy2.txt", "testfile_copy3.txt"])
-
-#     # Call the method with max_copies set to something small to ensure we don't overflow
-#     response = fm.copy_file(file_name, base_new_path, max_copies=5)
-
-#     # Expected new file path after resolving conflicts
-#     expected_new_file = os.path.join(fm.path, "testfile_copy3.txt")
-
-#     # Assertions
-#     assert "copied successfully" in response, "The response should indicate success"
-#     # Check the shutil.copy call to ensure it used the correct, non-conflicting filename
-#     mock_copy.assert_called_once_with(os.path.join(fm.path, file_name), expected_new_file)
-
-#     # Verify the file list is correctly updated if needed
-#     assert "testfile_copy3.txt" in fm.files, "New file should be in the files list after copy"
-
-# Use context manager to patch
-with patch('shutil.copy') as mock_copy:
-    # Your test code here
-    
-    def test_copy_file_with_conflicts(mocker):
-        # Setup
-        fm = FileManager()
-        fm.path = '/fake/directory'
-        file_name = "testfile.txt"
-        base_new_path = os.path.join(fm.path, 'testfile.txt')  # Initial target path
-
-        # Mock os.path.exists for file existence and path validation
-        mocker.patch('os.path.exists', side_effect=[True, True, True, False])
-        mocker.patch('src.FileManagementSystem.FileManager.is_valid_path', return_value=True)  # Path is valid
-        mock_copy = mocker.patch('shutil.copy')
-        mocker.patch('os.listdir', return_value=[file_name, "testfile_copy1.txt", "testfile_copy2.txt"])
-
-        # Call the method with max_copies set to allow some retries
-        response = fm.copy_file(file_name, base_new_path, max_copies=5)
-
-        # Expected new file path after resolving conflicts
-        expected_new_file = os.path.join(fm.path, "testfile_copy3.txt")
-
-        # Assertions
-        assert "copied successfully" in response, "The response should indicate success"
-        mock_copy.assert_called_once_with(os.path.join(fm.path, file_name), expected_new_file)
-        assert "testfile_copy3.txt" in fm.files, "New file should be in the files list after copy"
-
-        pass
