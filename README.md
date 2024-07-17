@@ -239,7 +239,7 @@ This section of the documentation describes the preliminary steps involved in pr
 
 ### GitHub Project Planner
 
-Utilized the Projects secction of GitHub for planning and coordinating development.
+Utilized the Projects section of GitHub for planning and coordinating development.
 
 ![Projects GitHub](Files/Projects.jpeg)
 
