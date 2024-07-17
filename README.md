@@ -344,7 +344,7 @@ The testing strategy for the File Management System aimed to ensure basic functi
 
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
 
-To view the a test click its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
+To view a test click on its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
 
 ![Example of test](files/Test.gif)
 
