@@ -346,7 +346,7 @@ This testing approach reflects a balance between thoroughness and practicality, 
 
 To view a test click on its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
 
-## Mock Testing File Operations 
+### Mock Testing File Operations 
 
 ![Example of test](Files/Test.gif)
 
@@ -385,8 +385,6 @@ Reflecting on the development of the File Management System has provided invalua
 # Conclusion
 
 This project was not just about building a functional file management system but also about personal and professional growth. The technical skills and project management insights gained have prepared me for future software development projects, emphasizing that the journey is just as important as the final product.
-
-ADD CUTE PIC
 
 ## Future Work
 
@@ -456,3 +454,5 @@ If you have any questions or comments about the project, or if you're interested
 - **Python Official Documentation**: The Python documentation (https://docs.python.org/3/) was invaluable for understanding the standard libraries and functions.
 - **Stack Overflow**: Various threads and discussions on Stack Overflow (https://stackoverflow.com/) provided solutions and insights for specific programming challenges encountered during the development of the project.
 - **GitHub Docs**: The GitHub documentation (https://docs.github.com/en) was a guide for using Git and GitHub for version control and project management, ensuring best practices in code sharing and collaboration.
+
+  ![Waving Robot](Files/WavingRobot.gif)
