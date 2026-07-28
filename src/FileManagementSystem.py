@@ -4,9 +4,8 @@ import logging
 import sys
 import readline
 import functools
-import time 
+import time
 import logging.config
-import functools
 
 # Load the logging configuration
 logging.config.fileConfig('config/logging.conf')
