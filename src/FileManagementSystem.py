@@ -2,10 +2,16 @@ import os
 import shutil
 import logging
 import sys
-import readline
 import functools
 import time
 import logging.config
+
+try:
+    import readline
+except ImportError:
+    # readline is not in the standard library on Windows. Tab completion is
+    # unavailable there, but everything else works.
+    readline = None
 
 # Load the logging configuration
 logging.config.fileConfig('config/logging.conf')
@@ -49,8 +55,9 @@ def complete(text, state):
     results = [x for x in os.listdir('.') if x.startswith(text)] + [None]
     return results[state]
 
-readline.set_completer(complete)
-readline.parse_and_bind("tab: complete")
+if readline is not None:
+    readline.set_completer(complete)
+    readline.parse_and_bind("tab: complete")
 
 class Document:
     def __init__(self, file_name):
@@ -349,7 +356,8 @@ class CLI:
         self.display_menu()
 
     def get_input(self, prompt):
-        readline.set_completer_delims(' \t\n;')
+        if readline is not None:
+            readline.set_completer_delims(' \t\n;')
         input_value = input(prompt)
         return input_value
     

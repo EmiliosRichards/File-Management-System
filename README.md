@@ -30,7 +30,7 @@ Before Installing, ensure you have the following software requirements:
 
 - Python 3.8 or Higher
 - Git (for cloning repository)
-- On Windows: `pyreadline3` (`pip install pyreadline3`). The CLI imports `readline` for tab completion, which is not in the Windows standard library, so the application will not start without it.
+- Optional, Windows only: `pyreadline3` (`pip install pyreadline3`). `readline` is not in the Windows standard library, so tab completion is unavailable there. The application runs without it.
 - To run the test suite: `pytest` and `pytest-mock` (`pip install pytest pytest-mock`)
 
 ### Installing 
@@ -239,13 +239,11 @@ This section of the documentation describes the preliminary steps involved in pr
      dependencies:
        - python=3.8
      ```
-   - Two things are not captured by that file and have to be installed separately: `pytest` and `pytest-mock` to run the test suite, and `pyreadline3` on Windows to supply the `readline` module the CLI imports.
+   - Not captured by that file: `pytest` and `pytest-mock`, needed to run the test suite. On Windows, `pyreadline3` is optional and only restores tab completion.
 
 ### GitHub Project Planner
 
 Utilized the Projects section of GitHub for planning and coordinating development.
-
-![Projects GitHub](Files/Projects.jpeg)
 
 ## Architecture Design
 
