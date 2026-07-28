@@ -1,5 +1,14 @@
 # IDE and editor folders
 .vscode/
+.idea/
 
 # Python test cache
 .pytest_cache/
+
+# Python bytecode
+__pycache__/
+*.py[cod]
+
+# OS cruft
+.DS_Store
+Thumbs.db
