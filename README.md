@@ -30,6 +30,8 @@ Before Installing, ensure you have the following software requirements:
 
 - Python 3.8 or Higher
 - Git (for cloning repository)
+- On Windows: `pyreadline3` (`pip install pyreadline3`). The CLI imports `readline` for tab completion, which is not in the Windows standard library, so the application will not start without it.
+- To run the test suite: `pytest` and `pytest-mock` (`pip install pytest pytest-mock`)
 
 ### Installing 
 
@@ -226,19 +228,18 @@ This section of the documentation describes the preliminary steps involved in pr
 1. **Creating a Virtual Environment**:
    - A virtual environment was created using Conda to handle dependencies:
      ```bash
-     conda create --name filemgmt python=3.8
-     conda activate filemgmt
+     conda create --name FileManagementSystem python=3.8
+     conda activate FileManagementSystem
      ```
 
 2. **Managing Dependencies with `environment.yml`**:
-   - Although this project solely relies on Python without external dependencies, an `environment.yml` file was prepared to standardize setup if needed in the future:
+   - The application code itself uses only the standard library, so the `environment.yml` file is deliberately minimal:
      ```yaml
-     name: filemgmt
+     name: FileManagementSystem
      dependencies:
        - python=3.8
-       - pip:
-         - example-library==2.0  # Hypothetical library if needed
      ```
+   - Two things are not captured by that file and have to be installed separately: `pytest` and `pytest-mock` to run the test suite, and `pyreadline3` on Windows to supply the `readline` module the CLI imports.
 
 ### GitHub Project Planner
 
@@ -434,7 +435,7 @@ The development of the File Management System has laid a robust foundation for f
 Contributions are welcome! There are many ways you can contribute to this project:
 
 - **Reporting Bugs**: If you find a bug, please open an issue in the GitHub repository, providing a detailed description of the bug and, if possible, steps to reproduce it.
-- **Suggesting Enhancements**: Have ideas on how to improve the calculator? Open an issue to suggest new features or enhancements.
+- **Suggesting Enhancements**: Have ideas on how to improve the File Management System? Open an issue to suggest new features or enhancements.
 - **Submitting Pull Requests**: Feel free to fork the repository and submit pull requests with bug fixes or feature additions.
 
 Please adhere to the following steps for your contributions to be considered:
