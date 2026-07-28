@@ -10,8 +10,8 @@ Welcome! This document outlines the development of a File Management System desi
 
 - [**Installation Guide for File Management System**](#installation-guide-for-file-management-system): Walks through the steps needed to install and use the File Management System.
 - [**Project Significance**](#project-significance): Explains what a File Management System is and the rationale behind building a custom version.
-- [**Design Phase**](#design-phase-technical-insights): Outlines the initial design and planning stages of the project, focusing on the architectural decisions and technology choices made to support the development.
-- [**Building Process**](#building-process): Details the steps taken in constructing the system, focusing on development strategies and implementation.
+- [**Design Phase**](#design-phase-pre-build): Outlines the initial design and planning stages of the project, focusing on the architectural decisions and technology choices made to support the development.
+- [**Building Process**](#building-process-post-build): Details the steps taken in constructing the system, focusing on development strategies and implementation.
 - [**Testing and Quality Assurance**](#testing-and-quality-assurance): Describes the testing methodologies and quality assurance processes used to ensure the system's reliability.
 - [**Lessons Learned**](#lessons-learned): Reflects on the overall project experience, highlighting unexpected outcomes and key takeaways.
 - [**Conclusion**](#conclusion): Provides a summary of the project, opportunities for contribution, and future directions for related work.
