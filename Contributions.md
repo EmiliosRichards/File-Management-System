@@ -26,5 +26,7 @@ Contact
 If you have any further questions or want to discuss your contributions more directly, feel free to reach out:
 
 Project Maintainer: Emilios Richards
-Email: github.com/EmiliosRichards
-GitHub Profile: EmiliosRichards
+GitHub Profile: https://github.com/EmiliosRichards
+<!-- LinkedIn: [Add LinkedIn profile URL here] -->
+
+The best way to get in touch is to open an issue on the repository.

@@ -26,7 +26,7 @@ Follow these steps to install and set up the File Management System on your comp
 
 **Prerequisites**
 
-Before Installing, ensure you have the following software requirments: 
+Before Installing, ensure you have the following software requirements: 
 
 - Python 3.8 or Higher
 - Git (for cloning repository)
@@ -103,7 +103,7 @@ A File Management System (FMS) like Windows' File Explorer or macOS's Finder ena
 
 ## Why Create a FMS?
 
-"You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?'" The answer lies in the unique learning opportunities and the ablity to surpass the limitations of traditional systems. 
+"You might wonder, 'Why create a custom FMS with options like File Explorer and Finder available?'" The answer lies in the unique learning opportunities and the ability to surpass the limitations of traditional systems. 
 
 A custom-built FMS provides the following opportunities:
 
@@ -121,11 +121,11 @@ This project not only enhances technical skills but also surpasses the limitatio
 
 # Design Phase (Pre-build)
 
-- **The Design Phase will provide perspective on expectations of the project, serving as a good reference for assesment and reflection post-build.**
+- **The Design Phase will provide perspective on expectations of the project, serving as a good reference for assessment and reflection post-build.**
 
 ## Project Overview
 
-**Project Statement and Scope**: The goal of this project is to develop a custom built file management system with python, utilising object oriented programming techniques. This process will also invlove the implementation of File IO operations and exception handling.
+**Project Statement and Scope**: The goal of this project is to develop a custom built file management system with python, utilising object oriented programming techniques. This process will also involve the implementation of File IO operations and exception handling.
 
 **Objective**: The objective of this project is to apply the python concepts mentioned above to create a user friendly custom built file management system. This system will be designed to store, retrieve, and manage documents or records in the form of text files, acting as a simple database.
 
@@ -151,7 +151,7 @@ The File Management System must be able to:
 
 - Create, read, update, and delete files (CRUD operations).
 - Organizing files into directories based on categories or tags. Initially, the system will organize files into predefined categories such as 'Documents', 'Images', etc. Future updates will introduce the ability to create custom tags, enhancing personalization and search functionality.
-- Searching for files based on name, content, categorie, tag, or metadata. Perfrom a non case-senstitive search in real-time.
+- Searching for files based on name, content, category, tag, or metadata. Perform a non case-sensitive search in real-time.
 
 
 ## Non-Functional Requirements
@@ -159,7 +159,7 @@ The File Management System must be able to:
 The File Management System should:
 
 - Work through the Command Line.
-- Have a clean aesthetic with clear prompts and feedback messages. To acheive a 'clean aesthetic' it must be unclutted with a consistant format.
+- Have a clean aesthetic with clear prompts and feedback messages. To achieve a 'clean aesthetic' it must be uncluttered with a consistent format.
 - Cross platform compatibility.
 - Have intuitive commands and seamless exception handling. Commands must be labeled and located in a natural way keeping usage straightforward. 
 - Uncluttered code built with the potential of expansion and modification in mind.
@@ -174,10 +174,10 @@ A simplified representation of how the File Manager will work:
 1. Welcome message
 2. Display available actions and corresponding number. 
 3. Accept a number as input.
-4. Prompt for any relevent additinal input.
+4. Prompt for any relevant additional input.
 5. Perform action. 
 
-Constant: Cancel/ back + exit appliction functionality.
+Constant: Cancel/ back + exit application functionality.
 
 ![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Flowchart.png)
 
@@ -444,15 +444,17 @@ For more information on how to contribute, please read the [Contributions.md](ht
 
 ### Licence
 
-This project is licensed under the MIT License - see the [LICENSE]([https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
 
 ### Contact Information
 
 If you have any questions or comments about the project, or if you're interested in contributing, feel free to reach out:
 
 - **Project Maintainer**: Emilios Richards
-- **Email**: github.com/EmiliosRichards
 - **GitHub Profile**: [EmiliosRichards](https://github.com/EmiliosRichards)
+<!-- - **LinkedIn**: [Add LinkedIn profile URL here] -->
+
+The best way to get in touch is to open an issue on the [GitHub repository](https://github.com/EmiliosRichards/File-Management-System/issues).
 
 ### References
 
