@@ -456,7 +456,7 @@ If you have any questions or comments about the project, or if you're interested
 
 - **Project Maintainer**: Emilios Richards
 - **GitHub Profile**: [EmiliosRichards](https://github.com/EmiliosRichards)
-<!-- - **LinkedIn**: [Add LinkedIn profile URL here] -->
+- **LinkedIn**: [emiliosrichards](https://www.linkedin.com/in/emiliosrichards/)
 
 The best way to get in touch is to open an issue on the [GitHub repository](https://github.com/EmiliosRichards/File-Management-System/issues).
 

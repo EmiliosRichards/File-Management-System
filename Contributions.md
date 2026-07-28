@@ -27,6 +27,6 @@ If you have any further questions or want to discuss your contributions more dir
 
 Project Maintainer: Emilios Richards
 GitHub Profile: https://github.com/EmiliosRichards
-<!-- LinkedIn: [Add LinkedIn profile URL here] -->
+LinkedIn: https://www.linkedin.com/in/emiliosrichards/
 
 The best way to get in touch is to open an issue on the repository.
