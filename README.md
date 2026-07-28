@@ -46,7 +46,7 @@ git clone https://github.com/EmiliosRichards/File-Management-System
 Change to the project directory with:
 
 ```bash
-cd File Management System
+cd File-Management-System
 ```
 
 **Step 3: Configure Logging and Other Settings**
@@ -58,16 +58,19 @@ cd config
 ```
 Make necessary adjustments to the logging.conf file to suit your needs. This configuration file dictates how logging is handled in the application, such as the log level and file outputs.
 
-**Step 5: Run the Application**
+**Step 4: Run the Application**
 
 Return to the main project directory and run the application:
 
 ```bash
 cd ..
-python FileManagementSystem.py
+python src/FileManagementSystem.py
 ```
 
-**Step 6: Testing the Installation**
+The application must be started from the main project directory, because the
+logging setup looks for `config/logging.conf` relative to the current directory.
+
+**Step 5: Testing the Installation**
 
 After installation, it’s a good idea to test basic functionalities to ensure everything is working as expected. Try listing files, creating a new file, or other basic operations.
 
@@ -179,7 +182,7 @@ A simplified representation of how the File Manager will work:
 
 Constant: Cancel/ back + exit application functionality.
 
-![Design Flowchart](https://github.com/EmiliosRichards/File-Management-System/blob/main/Files/Flowchart.png)
+![Design Flowchart](Files/Flowchart.png)
 
 
 **This covers the design phase of the project.**
@@ -349,7 +352,7 @@ The testing strategy for the File Management System aimed to ensure basic functi
 
 This testing approach reflects a balance between thoroughness and practicality, appropriate for the system’s scale and complexity. It highlights areas where the system excels and acknowledges the potential for further enhancements in robustness and user interface design.
 
-To view a test click on its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_files_max_copies.py)
+To view a test click on its name: [File_Operations](tests/test_file_operations.py) [Copy File Success](tests/test_copy_file_success.py) [Copy File Conflicts](tests/test_copy_file_conflicts_operations.py) [Copy File Other](tests/test_copy_file_max_copies.py)
 
 ### Mock Testing File Operations 
 
@@ -440,11 +443,11 @@ Please adhere to the following steps for your contributions to be considered:
 - Ensure your commit messages clearly describe the changes.
 - Open a pull request with a clear title and description.
 
-For more information on how to contribute, please read the [Contributions.md](https://github.com/EmiliosRichards/File-Management-System/blob/main/Contributions.md) guide in our repository.
+For more information on how to contribute, please read the [Contributions.md](Contributions.md) guide in our repository.
 
 ### Licence
 
-This project is licensed under the MIT License - see the [LICENSE](https://github.com/EmiliosRichards/File-Management-System/blob/main/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ### Contact Information
 
